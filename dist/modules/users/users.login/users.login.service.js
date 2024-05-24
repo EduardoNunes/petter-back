@@ -1,0 +1,51 @@
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.UsersLoginService = void 0;
+const common_1 = require("@nestjs/common");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const PrismaService_1 = require("../../../database/PrismaService");
+const jwt_config_1 = require("../../../utils/jwt-config");
+let UsersLoginService = class UsersLoginService {
+    constructor(prisma) {
+        this.prisma = prisma;
+    }
+    async login(data) {
+        const user = await this.prisma.users.findFirst({
+            where: {
+                email: data.email,
+            },
+        });
+        if (!user) {
+            throw new common_1.NotFoundException('Email ou senha inválidos');
+        }
+        const isPasswordValid = await bcrypt.compare(data.password, user.password);
+        if (!isPasswordValid) {
+            throw new common_1.HttpException('Email ou senha inválidos.', common_1.HttpStatus.UNAUTHORIZED);
+        }
+        const token = jwt.sign({
+            name: user.name,
+            email: user.email,
+            password: user.password,
+            profileImage: user.profileImage,
+        }, jwt_config_1.jwtConstants.secret, {
+            expiresIn: jwt_config_1.jwtConstants.expiresIn,
+        });
+        console.log(token);
+    }
+};
+exports.UsersLoginService = UsersLoginService;
+exports.UsersLoginService = UsersLoginService = __decorate([
+    (0, common_1.Injectable)(),
+    __metadata("design:paramtypes", [PrismaService_1.PrismaService])
+], UsersLoginService);
+//# sourceMappingURL=users.login.service.js.map

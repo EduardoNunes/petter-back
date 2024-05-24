@@ -6,23 +6,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AppModule = void 0;
+exports.UsersModule = void 0;
 const common_1 = require("@nestjs/common");
-const users_register_module_1 = require("./modules/users/users.register-credentials/users.register.module");
-const users_login_module_1 = require("./modules/users/users.login/users.login.module");
-const config_1 = require("@nestjs/config");
-let AppModule = class AppModule {
+const users_register_service_1 = require("./users.register.service");
+const users_register_controller_1 = require("./users.register.controller");
+const PrismaService_1 = require("../../../database/PrismaService");
+let UsersModule = class UsersModule {
 };
-exports.AppModule = AppModule;
-exports.AppModule = AppModule = __decorate([
+exports.UsersModule = UsersModule;
+exports.UsersModule = UsersModule = __decorate([
     (0, common_1.Module)({
-        imports: [
-            config_1.ConfigModule.forRoot({ isGlobal: true }),
-            users_register_module_1.UsersModule,
-            users_login_module_1.UsersLoginModule,
-        ],
-        controllers: [],
-        providers: [],
+        controllers: [users_register_controller_1.UsersController],
+        providers: [users_register_service_1.UsersService, PrismaService_1.PrismaService],
     })
-], AppModule);
-//# sourceMappingURL=app.module.js.map
+], UsersModule);
+//# sourceMappingURL=users.register.module.js.map
