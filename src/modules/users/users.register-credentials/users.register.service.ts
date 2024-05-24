@@ -20,8 +20,7 @@ export class UsersService {
       throw new HttpException('Este email já está cadastrado.', HttpStatus.BAD_REQUEST);
     }
 
-    const saltOrRounds = 10;
-    const hash = await bcrypt.hash(data.password, saltOrRounds);
+    const hash = await bcrypt.hash(data.password, this.saltOrRounds);
     const user = await this.prisma.users.create({
       data: {
         name: data.name,
@@ -29,13 +28,27 @@ export class UsersService {
         password: hash,
         profileImage: data.profileImage,
       },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        profileImage: true,        
+      },
     });
 
     return user;
   }
 
-  private readonly users = this.prisma.users.findMany();
   async findOne(email: string): Promise<any | undefined> {
-    return (await this.users).find((user) => user.email === email);
+    const user = await this.prisma.users.findFirst({
+      where: { email },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        profileImage: true,        
+      },
+    });
+    return user;
   }
 }

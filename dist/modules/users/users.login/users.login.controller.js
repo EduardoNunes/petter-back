@@ -22,6 +22,7 @@ let UsersLoginController = class UsersLoginController {
     async login(data) {
         try {
             const { accessToken } = await this.usersLoginService.login(data);
+            console.log("DATA", data);
             return { accessToken };
         }
         catch (error) {

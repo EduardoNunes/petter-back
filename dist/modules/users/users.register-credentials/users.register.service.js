@@ -17,7 +17,6 @@ let UsersService = class UsersService {
     constructor(prisma) {
         this.prisma = prisma;
         this.saltOrRounds = 10;
-        this.users = this.prisma.users.findMany();
     }
     async createUserCredentials(data) {
         const userExist = await this.prisma.users.findFirst({
@@ -28,8 +27,7 @@ let UsersService = class UsersService {
         if (userExist) {
             throw new common_1.HttpException('Este email já está cadastrado.', common_1.HttpStatus.BAD_REQUEST);
         }
-        const saltOrRounds = 10;
-        const hash = await bcrypt.hash(data.password, saltOrRounds);
+        const hash = await bcrypt.hash(data.password, this.saltOrRounds);
         const user = await this.prisma.users.create({
             data: {
                 name: data.name,
@@ -37,11 +35,26 @@ let UsersService = class UsersService {
                 password: hash,
                 profileImage: data.profileImage,
             },
+            select: {
+                id: true,
+                name: true,
+                email: true,
+                profileImage: true,
+            },
         });
         return user;
     }
     async findOne(email) {
-        return (await this.users).find((user) => user.email === email);
+        const user = await this.prisma.users.findFirst({
+            where: { email },
+            select: {
+                id: true,
+                name: true,
+                email: true,
+                profileImage: true,
+            },
+        });
+        return user;
     }
 };
 exports.UsersService = UsersService;

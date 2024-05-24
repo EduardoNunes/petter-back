@@ -5,8 +5,8 @@ import {
   HttpStatus,
   Post,
 } from '@nestjs/common';
-import { UsersLoginService } from './users.login.service';
 import { UsersLoginDTO } from './users.login.dto';
+import { UsersLoginService } from './users.login.service';
 
 @Controller('auth')
 export class UsersLoginController {
@@ -16,6 +16,7 @@ export class UsersLoginController {
   async login(@Body() data: UsersLoginDTO) {
     try {
       const { accessToken } = await this.usersLoginService.login(data);
+      console.log("DATA", data)
       return { accessToken };
     } catch (error) {
       if (error instanceof HttpException) {

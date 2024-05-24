@@ -8,9 +8,7 @@ export declare class UsersService {
         id: number;
         name: string;
         email: string;
-        password: string;
         profileImage: string;
     }>;
-    private readonly users;
     findOne(email: string): Promise<any | undefined>;
 }
