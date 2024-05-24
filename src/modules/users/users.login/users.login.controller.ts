@@ -8,17 +8,23 @@ import {
 import { UsersLoginService } from './users.login.service';
 import { UsersLoginDTO } from './users.login.dto';
 
-@Controller('users-login')
+@Controller('auth')
 export class UsersLoginController {
   constructor(private readonly usersLoginService: UsersLoginService) {}
 
-  @Post()
-  async create(@Body() data: UsersLoginDTO) {
+  @Post('login')
+  async login(@Body() data: UsersLoginDTO) {
     try {
-      const token = await this.usersLoginService.login(data);
-      return { token };
+      const { accessToken } = await this.usersLoginService.login(data);
+      return { accessToken };
     } catch (error) {
-      throw new HttpException(error.message, HttpStatus.UNAUTHORIZED);
+      if (error instanceof HttpException) {
+        throw error;
+      }
+      throw new HttpException(
+        'Erro interno do servidor',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
     }
   }
 }

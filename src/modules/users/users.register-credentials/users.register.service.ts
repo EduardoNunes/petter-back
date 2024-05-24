@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { UsersDTO } from './users.register.dto';
 import { PrismaService } from 'src/database/PrismaService';
 import * as bcrypt from 'bcrypt';
@@ -17,7 +17,7 @@ export class UsersService {
     });
 
     if (userExist) {
-      throw new Error('Este email já está cadastrado.');
+      throw new HttpException('Este email já está cadastrado.', HttpStatus.BAD_REQUEST);
     }
 
     const saltOrRounds = 10;

@@ -26,7 +26,7 @@ let UsersService = class UsersService {
             },
         });
         if (userExist) {
-            throw new Error('Este email já está cadastrado.');
+            throw new common_1.HttpException('Este email já está cadastrado.', common_1.HttpStatus.BAD_REQUEST);
         }
         const saltOrRounds = 10;
         const hash = await bcrypt.hash(data.password, saltOrRounds);

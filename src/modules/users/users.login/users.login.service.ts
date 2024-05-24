@@ -1,14 +1,13 @@
 import {
   HttpException,
   HttpStatus,
-  Injectable,
-  NotFoundException,
+  Injectable
 } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
 import { PrismaService } from 'src/database/PrismaService';
-import { UsersLoginDTO } from './users.login.dto';
 import { jwtConstants } from 'src/utils/jwt-config';
+import { UsersLoginDTO } from './users.login.dto';
 
 @Injectable()
 export class UsersLoginService {
@@ -22,7 +21,7 @@ export class UsersLoginService {
     });
 
     if (!user) {
-      throw new NotFoundException('Email ou senha inválidos');
+      throw new HttpException('Email ou senha inválidos', HttpStatus.BAD_REQUEST);
     }
 
     const isPasswordValid = await bcrypt.compare(data.password, user.password);
@@ -38,7 +37,6 @@ export class UsersLoginService {
       {
         name: user.name,
         email: user.email,
-        password: user.password,
         profileImage: user.profileImage,
       },
       jwtConstants.secret,
@@ -47,6 +45,6 @@ export class UsersLoginService {
       },
     );
 
-    console.log(token);
+    return { accessToken: token };
   }
 }

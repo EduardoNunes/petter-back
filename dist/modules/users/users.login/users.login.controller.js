@@ -19,26 +19,29 @@ let UsersLoginController = class UsersLoginController {
     constructor(usersLoginService) {
         this.usersLoginService = usersLoginService;
     }
-    async create(data) {
+    async login(data) {
         try {
-            const token = await this.usersLoginService.login(data);
-            return { token };
+            const { accessToken } = await this.usersLoginService.login(data);
+            return { accessToken };
         }
         catch (error) {
-            throw new common_1.HttpException(error.message, common_1.HttpStatus.UNAUTHORIZED);
+            if (error instanceof common_1.HttpException) {
+                throw error;
+            }
+            throw new common_1.HttpException('Erro interno do servidor', common_1.HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 };
 exports.UsersLoginController = UsersLoginController;
 __decorate([
-    (0, common_1.Post)(),
+    (0, common_1.Post)('login'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
-], UsersLoginController.prototype, "create", null);
+], UsersLoginController.prototype, "login", null);
 exports.UsersLoginController = UsersLoginController = __decorate([
-    (0, common_1.Controller)('users-login'),
+    (0, common_1.Controller)('auth'),
     __metadata("design:paramtypes", [users_login_service_1.UsersLoginService])
 ], UsersLoginController);
 //# sourceMappingURL=users.login.controller.js.map

@@ -3,5 +3,7 @@ import { UsersLoginDTO } from './users.login.dto';
 export declare class UsersLoginService {
     private prisma;
     constructor(prisma: PrismaService);
-    login(data: UsersLoginDTO): Promise<void>;
+    login(data: UsersLoginDTO): Promise<{
+        accessToken: string;
+    }>;
 }

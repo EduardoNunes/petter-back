@@ -26,7 +26,7 @@ let UsersLoginService = class UsersLoginService {
             },
         });
         if (!user) {
-            throw new common_1.NotFoundException('Email ou senha inválidos');
+            throw new common_1.HttpException('Email ou senha inválidos', common_1.HttpStatus.BAD_REQUEST);
         }
         const isPasswordValid = await bcrypt.compare(data.password, user.password);
         if (!isPasswordValid) {
@@ -35,12 +35,11 @@ let UsersLoginService = class UsersLoginService {
         const token = jwt.sign({
             name: user.name,
             email: user.email,
-            password: user.password,
             profileImage: user.profileImage,
         }, jwt_config_1.jwtConstants.secret, {
             expiresIn: jwt_config_1.jwtConstants.expiresIn,
         });
-        console.log(token);
+        return { accessToken: token };
     }
 };
 exports.UsersLoginService = UsersLoginService;
