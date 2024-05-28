@@ -6,18 +6,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UsersRegisterCredentialsModule = void 0;
+exports.UserRegisterInfosModule = void 0;
 const common_1 = require("@nestjs/common");
-const users_register_service_1 = require("./users.register.service");
-const users_register_controller_1 = require("./users.register.controller");
+const user_register_infos_controller_1 = require("./user-register-infos.controller");
+const user_register_infos_service_1 = require("./user-register-infos.service");
 const PrismaService_1 = require("../../../database/PrismaService");
-let UsersRegisterCredentialsModule = class UsersRegisterCredentialsModule {
+let UserRegisterInfosModule = class UserRegisterInfosModule {
 };
-exports.UsersRegisterCredentialsModule = UsersRegisterCredentialsModule;
-exports.UsersRegisterCredentialsModule = UsersRegisterCredentialsModule = __decorate([
+exports.UserRegisterInfosModule = UserRegisterInfosModule;
+exports.UserRegisterInfosModule = UserRegisterInfosModule = __decorate([
     (0, common_1.Module)({
-        controllers: [users_register_controller_1.UsersController],
-        providers: [users_register_service_1.UsersService, PrismaService_1.PrismaService],
+        controllers: [user_register_infos_controller_1.UserRegisterInfosController],
+        providers: [user_register_infos_service_1.UserRegisterInfosService, PrismaService_1.PrismaService],
+        exports: [user_register_infos_service_1.UserRegisterInfosService],
     })
-], UsersRegisterCredentialsModule);
-//# sourceMappingURL=users.register.module.js.map
+], UserRegisterInfosModule);
+//# sourceMappingURL=user-register-infos.module.js.map

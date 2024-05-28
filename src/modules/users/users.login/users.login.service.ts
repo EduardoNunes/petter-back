@@ -1,8 +1,4 @@
-import {
-  HttpException,
-  HttpStatus,
-  Injectable
-} from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
 import { PrismaService } from 'src/database/PrismaService';
@@ -15,9 +11,7 @@ export class UsersLoginService {
 
   async login(data: UsersLoginDTO) {
     const user = await this.prisma.users.findFirst({
-      where: {
-        email: data.email,
-      },
+      where: { email: data.email },
     });
 
     if (!user) {
@@ -27,24 +21,20 @@ export class UsersLoginService {
     const isPasswordValid = await bcrypt.compare(data.password, user.password);
 
     if (!isPasswordValid) {
-      throw new HttpException(
-        'Email ou senha inválidos.',
-        HttpStatus.UNAUTHORIZED,
-      );
+      throw new HttpException('Email ou senha inválidos', HttpStatus.UNAUTHORIZED);
     }
 
-    const token = jwt.sign(
-      {
-        name: user.name,
-        email: user.email,
-        profileImage: user.profileImage,
-      },
-      jwtConstants.secret,
-      {
-        expiresIn: jwtConstants.expiresIn,
-      },
-    );
+    const payload = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      profileImage: user.profileImage,
+    };
 
-    return { accessToken: token };
+    const accessToken = jwt.sign(payload, jwtConstants.secret, {
+      expiresIn: jwtConstants.expiresIn,
+    });
+
+    return { accessToken };
   }
 }

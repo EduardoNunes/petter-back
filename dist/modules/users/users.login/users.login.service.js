@@ -21,25 +21,25 @@ let UsersLoginService = class UsersLoginService {
     }
     async login(data) {
         const user = await this.prisma.users.findFirst({
-            where: {
-                email: data.email,
-            },
+            where: { email: data.email },
         });
         if (!user) {
             throw new common_1.HttpException('Email ou senha inválidos', common_1.HttpStatus.BAD_REQUEST);
         }
         const isPasswordValid = await bcrypt.compare(data.password, user.password);
         if (!isPasswordValid) {
-            throw new common_1.HttpException('Email ou senha inválidos.', common_1.HttpStatus.UNAUTHORIZED);
+            throw new common_1.HttpException('Email ou senha inválidos', common_1.HttpStatus.UNAUTHORIZED);
         }
-        const token = jwt.sign({
+        const payload = {
+            id: user.id,
             name: user.name,
             email: user.email,
             profileImage: user.profileImage,
-        }, jwt_config_1.jwtConstants.secret, {
+        };
+        const accessToken = jwt.sign(payload, jwt_config_1.jwtConstants.secret, {
             expiresIn: jwt_config_1.jwtConstants.expiresIn,
         });
-        return { accessToken: token };
+        return { accessToken };
     }
 };
 exports.UsersLoginService = UsersLoginService;

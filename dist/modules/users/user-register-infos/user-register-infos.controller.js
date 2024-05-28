@@ -12,36 +12,27 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UsersLoginController = void 0;
+exports.UserRegisterInfosController = void 0;
 const common_1 = require("@nestjs/common");
-const users_login_service_1 = require("./users.login.service");
-let UsersLoginController = class UsersLoginController {
-    constructor(usersLoginService) {
-        this.usersLoginService = usersLoginService;
+const user_register_infos_service_1 = require("./user-register-infos.service");
+let UserRegisterInfosController = class UserRegisterInfosController {
+    constructor(userRegisterInfosService) {
+        this.userRegisterInfosService = userRegisterInfosService;
     }
-    async login(data) {
-        try {
-            const { accessToken } = await this.usersLoginService.login(data);
-            return { accessToken };
-        }
-        catch (error) {
-            if (error instanceof common_1.HttpException) {
-                throw error;
-            }
-            throw new common_1.HttpException('Erro interno do servidor', common_1.HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    async create(data) {
+        return this.userRegisterInfosService.createUserInfos(data);
     }
 };
-exports.UsersLoginController = UsersLoginController;
+exports.UserRegisterInfosController = UserRegisterInfosController;
 __decorate([
-    (0, common_1.Post)('login'),
+    (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
-], UsersLoginController.prototype, "login", null);
-exports.UsersLoginController = UsersLoginController = __decorate([
-    (0, common_1.Controller)('auth'),
-    __metadata("design:paramtypes", [users_login_service_1.UsersLoginService])
-], UsersLoginController);
-//# sourceMappingURL=users.login.controller.js.map
+], UserRegisterInfosController.prototype, "create", null);
+exports.UserRegisterInfosController = UserRegisterInfosController = __decorate([
+    (0, common_1.Controller)('user-register-infos'),
+    __metadata("design:paramtypes", [user_register_infos_service_1.UserRegisterInfosService])
+], UserRegisterInfosController);
+//# sourceMappingURL=user-register-infos.controller.js.map

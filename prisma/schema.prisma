@@ -8,9 +8,29 @@ datasource db {
 }
 
 model Users {
-  id           Int     @id @default(autoincrement())
+  id           Int       @id @default(autoincrement())
   name         String
-  email        String  @unique
+  email        String    @unique
   password     String
   profileImage String?
+
+  userInfo     UserInfo?
+}
+
+model UserInfo {
+  id           Int       @id @default(autoincrement())
+  userId       Int       @unique
+  date         String
+  gender       String
+  phone        String
+  cep          String
+  neighborhood String
+  ddd          String
+  locality     String
+  publicPlace  String
+  uf           String
+
+  user         Users     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }

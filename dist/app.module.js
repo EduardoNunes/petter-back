@@ -8,9 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
-const users_register_module_1 = require("./modules/users/users.register-credentials/users.register.module");
-const users_login_module_1 = require("./modules/users/users.login/users.login.module");
 const config_1 = require("@nestjs/config");
+const user_register_infos_module_1 = require("./modules/users/user-register-infos/user-register-infos.module");
+const users_login_module_1 = require("./modules/users/users.login/users.login.module");
+const users_register_module_1 = require("./modules/users/users.register-credentials/users.register.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -18,11 +19,10 @@ exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
             config_1.ConfigModule.forRoot({ isGlobal: true }),
-            users_register_module_1.UsersModule,
+            users_register_module_1.UsersRegisterCredentialsModule,
             users_login_module_1.UsersLoginModule,
+            user_register_infos_module_1.UserRegisterInfosModule,
         ],
-        controllers: [],
-        providers: [],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map

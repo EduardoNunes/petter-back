@@ -7,4 +7,4 @@ import { PrismaService } from 'src/database/PrismaService';
   controllers: [UsersController],
   providers: [UsersService, PrismaService],
 })
-export class UsersModule {}
+export class UsersRegisterCredentialsModule {}
