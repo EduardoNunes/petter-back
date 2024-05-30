@@ -8,18 +8,19 @@ datasource db {
 }
 
 model Users {
-  id           Int       @id @default(autoincrement())
+  id           Int     @id @default(autoincrement())
   name         String
-  email        String    @unique
+  email        String  @unique
   password     String
   profileImage String?
 
-  userInfo     UserInfo?
+  userInfo   UserInfo?
+  PetterInfo PetterInfo[]
 }
 
 model UserInfo {
-  id           Int       @id @default(autoincrement())
-  userId       Int       @unique
+  id           Int    @id @default(autoincrement())
+  userId       Int    @unique
   date         String
   gender       String
   phone        String
@@ -30,7 +31,19 @@ model UserInfo {
   publicPlace  String
   uf           String
 
-  user         Users     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user Users @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
+}
+
+model PetterInfo {
+  id          Int    @id @default(autoincrement())
+  petterName  String
+  petterKind  String
+  petterBreed String
+  petterBirth String
+  userId      Int
+  user        Users  @relation(fields: [userId], references: [id])
+
+  @@map("petter_infos")
 }

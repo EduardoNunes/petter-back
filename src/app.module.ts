@@ -1,8 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { UserRegisterInfosModule } from './modules/users/user-register-infos/user-register-infos.module';
+
 import { UsersLoginModule } from './modules/users/users.login/users.login.module';
 import { UsersRegisterCredentialsModule } from './modules/users/users.register-credentials/users.register.module';
+
+import { PetterRegisterInfosModule } from './modules/petters/petter-register-infos/petter-register-infos.module';
+import { UserRegisterInfosModule } from './modules/users/user-register-infos/user-register-infos.module';
 
 @Module({
   imports: [
@@ -10,6 +13,7 @@ import { UsersRegisterCredentialsModule } from './modules/users/users.register-c
     UsersRegisterCredentialsModule,
     UsersLoginModule,
     UserRegisterInfosModule,
+    PetterRegisterInfosModule,
   ],
 })
 export class AppModule {}
