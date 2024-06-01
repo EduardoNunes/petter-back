@@ -4,8 +4,10 @@ import { ConfigModule } from '@nestjs/config';
 import { UsersLoginModule } from './modules/users/users.login/users.login.module';
 import { UsersRegisterCredentialsModule } from './modules/users/users.register-credentials/users.register.module';
 
-import { PetterRegisterInfosModule } from './modules/petters/petter-register-infos/petter-register-infos.module';
-import { UserRegisterInfosModule } from './modules/users/user-register-infos/user-register-infos.module';
+import { PetterRegisterInfosModule } from './modules/petters/petter-register-infos/petter.register.infos.module';
+import { UserRegisterInfosModule } from './modules/users/user-register-infos/user.register.infos.module';
+
+import { PettersRegisterImageModule } from './modules/petters/petter-register-images/petter.register.images.module';
 
 @Module({
   imports: [
@@ -14,6 +16,9 @@ import { UserRegisterInfosModule } from './modules/users/user-register-infos/use
     UsersLoginModule,
     UserRegisterInfosModule,
     PetterRegisterInfosModule,
+    PettersRegisterImageModule,
   ],
+  providers: [],
+  controllers: [],
 })
 export class AppModule {}

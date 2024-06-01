@@ -45,5 +45,17 @@ model PetterInfo {
   userId      Int
   user        Users  @relation(fields: [userId], references: [id])
 
+  PetterImages PetterImages[] @relation("PetterInfoToPetterImages")
+
   @@map("petter_infos")
+}
+
+model PetterImages {
+  id          Int        @id @default(autoincrement())
+  url         String
+  description String?
+  petterId    Int
+  petter      PetterInfo @relation(fields: [petterId], references: [id], name: "PetterInfoToPetterImages")
+
+  @@map("petter_images")
 }

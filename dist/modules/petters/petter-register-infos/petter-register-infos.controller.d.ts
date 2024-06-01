@@ -1,5 +1,5 @@
-import { PetterRegisterInfosDTO } from './petter.register.info.dto';
-import { PetterRegisterInfosService } from './petter-register-infos.service';
+import { PetterRegisterInfosDTO } from './petter-register-info-dto';
+import { PetterRegisterInfosService } from './petter.register.infos.service';
 export declare class PetterRegisterInfosController {
     private readonly petterRegisterInfosService;
     constructor(petterRegisterInfosService: PetterRegisterInfosService);

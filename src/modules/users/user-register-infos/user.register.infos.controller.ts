@@ -1,10 +1,12 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { UserRegisterInfosDTO } from './user.register.info.dto';
-import { UserRegisterInfosService } from './user-register-infos.service';
+import { UserRegisterInfosService } from './user.register.infos.service';
 
 @Controller('user-register-infos')
 export class UserRegisterInfosController {
-  constructor(private readonly userRegisterInfosService: UserRegisterInfosService) {}
+  constructor(
+    private readonly userRegisterInfosService: UserRegisterInfosService,
+  ) {}
 
   @Post()
   async create(@Body() data: UserRegisterInfosDTO) {

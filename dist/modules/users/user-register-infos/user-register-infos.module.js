@@ -9,7 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserRegisterInfosModule = void 0;
 const common_1 = require("@nestjs/common");
 const user_register_infos_controller_1 = require("./user-register-infos.controller");
-const user_register_infos_service_1 = require("./user-register-infos.service");
+const user_register_infos_service_1 = require("./user.register.infos.service");
 const PrismaService_1 = require("../../../database/PrismaService");
 let UserRegisterInfosModule = class UserRegisterInfosModule {
 };

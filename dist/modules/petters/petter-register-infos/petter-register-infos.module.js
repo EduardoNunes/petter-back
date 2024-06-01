@@ -9,7 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PetterRegisterInfosModule = void 0;
 const common_1 = require("@nestjs/common");
 const petter_register_infos_controller_1 = require("./petter-register-infos.controller");
-const petter_register_infos_service_1 = require("./petter-register-infos.service");
+const petter_register_infos_service_1 = require("./petter.register.infos.service");
 const PrismaService_1 = require("../../../database/PrismaService");
 let PetterRegisterInfosModule = class PetterRegisterInfosModule {
 };

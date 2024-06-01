@@ -13,6 +13,9 @@ let PrismaService = class PrismaService extends client_1.PrismaClient {
     async onModuleInit() {
         await this.$connect();
     }
+    async getPetterImages() {
+        return this.petterImages.findMany();
+    }
 };
 exports.PrismaService = PrismaService;
 exports.PrismaService = PrismaService = __decorate([

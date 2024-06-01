@@ -1,5 +1,5 @@
 import { PrismaService } from 'src/database/PrismaService';
-import { PetterRegisterInfosDTO } from './petter.register.info.dto';
+import { PetterRegisterInfosDTO } from './petter-register-info-dto';
 export declare class PetterRegisterInfosService {
     private prisma;
     constructor(prisma: PrismaService);
