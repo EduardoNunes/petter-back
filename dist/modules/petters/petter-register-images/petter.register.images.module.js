@@ -16,7 +16,7 @@ let PettersRegisterImageModule = class PettersRegisterImageModule {
 exports.PettersRegisterImageModule = PettersRegisterImageModule;
 exports.PettersRegisterImageModule = PettersRegisterImageModule = __decorate([
     (0, common_1.Module)({
-        controllers: [petter_register_images_controller_1.PetterRegisterImagesController],
+        controllers: [petter_register_images_controller_1.PettersRegisterImagesController],
         providers: [petter_register_images_service_1.PettersRegisterImagesService, PrismaService_1.PrismaService],
         exports: [petter_register_images_service_1.PettersRegisterImagesService],
     })

@@ -12,27 +12,31 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PetterRegisterImagesController = void 0;
+exports.PettersRegisterImagesController = void 0;
 const common_1 = require("@nestjs/common");
+const platform_express_1 = require("@nestjs/platform-express");
 const petter_register_images_service_1 = require("./petter.register.images.service");
-let PetterRegisterImagesController = class PetterRegisterImagesController {
-    constructor(petterRegisterImagesService) {
-        this.petterRegisterImagesService = petterRegisterImagesService;
+let PettersRegisterImagesController = class PettersRegisterImagesController {
+    constructor(pettersRegisterImagesService) {
+        this.pettersRegisterImagesService = pettersRegisterImagesService;
     }
-    async create(data) {
-        return this.petterRegisterImagesService.createPetterRegisterImage(data);
+    async uploadImage(files, data) {
+        data.images = files;
+        return this.pettersRegisterImagesService.createPetterRegisterImage(data.petterId, data);
     }
 };
-exports.PetterRegisterImagesController = PetterRegisterImagesController;
+exports.PettersRegisterImagesController = PettersRegisterImagesController;
 __decorate([
     (0, common_1.Post)(),
-    __param(0, (0, common_1.Body)()),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FilesInterceptor)('images')),
+    __param(0, (0, common_1.UploadedFiles)()),
+    __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Array, Object]),
     __metadata("design:returntype", Promise)
-], PetterRegisterImagesController.prototype, "create", null);
-exports.PetterRegisterImagesController = PetterRegisterImagesController = __decorate([
+], PettersRegisterImagesController.prototype, "uploadImage", null);
+exports.PettersRegisterImagesController = PettersRegisterImagesController = __decorate([
     (0, common_1.Controller)('petter-register-images'),
     __metadata("design:paramtypes", [petter_register_images_service_1.PettersRegisterImagesService])
-], PetterRegisterImagesController);
+], PettersRegisterImagesController);
 //# sourceMappingURL=petter.register.images.controller.js.map

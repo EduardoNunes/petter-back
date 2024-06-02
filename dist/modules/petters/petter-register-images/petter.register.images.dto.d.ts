@@ -1,5 +1,6 @@
+/// <reference types="multer" />
 export type PetterRegisterImagesDTO = {
     petterId: number;
-    url: string;
+    images: Express.Multer.File[];
     description?: string;
 };

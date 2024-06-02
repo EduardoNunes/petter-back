@@ -1,5 +1,5 @@
 export type PetterRegisterImagesDTO = {
-    petterId: number;
-    url: string;
-    description?: string;
-  };
+  petterId: number;
+  images: Express.Multer.File[]; 
+  description?: string;
+};
