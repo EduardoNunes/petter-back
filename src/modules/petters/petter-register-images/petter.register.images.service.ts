@@ -38,39 +38,33 @@ export class PettersRegisterImagesService {
     }
   }
 
-  async createPetterRegisterImage(
-    petterId: number,
-    data: PetterRegisterImagesDTO, 
-  ) {
-    const petterExist = await this.prisma.petterInfo.findUnique({
-      where: {
-        id: Number(petterId),
-      },
-    });
-
-    if (!petterExist) {
-      throw new HttpException('Petter não encontrado.', HttpStatus.BAD_REQUEST);
-    }
-
+  async createPetterRegisterImage(petterId, data: PetterRegisterImagesDTO) {
     const imageUrls: string[] = [];
-    for (const file of data.images) { // Modificação: Itera sobre a array de arquivos
-      const imageUrl = await this.uploadImageToS3(file);
+
+    for (let i = 0; i < data.images.length; i++) {
+      const petterExist = await this.prisma.petterInfo.findUnique({
+        where: {
+          id: Number(petterId[i]),
+        },
+      });
+
+      if (!petterExist) {
+        throw new HttpException(
+          'Petter não encontrado.',
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+
+      const imageUrl = await this.uploadImageToS3(data.images[i]);
       imageUrls.push(imageUrl);
+
+      const newPetterImages = await this.prisma.petterImages.create({
+        data: {
+          url: imageUrl,
+          petterId: Number(petterId[i]),
+        },
+      });
+      console.log('Novas imagens do Petter criadas:', newPetterImages);
     }
-
-    const newPetterImages = await Promise.all(
-      imageUrls.map((imageUrl) =>
-        this.prisma.petterImages.create({
-          data: {
-            url: imageUrl,
-            description: data.description,
-            petterId: Number(petterId),
-          },
-        }),
-      ),
-    );
-
-    console.log('Novas imagens do Petter criadas:', newPetterImages);
-    return newPetterImages;
   }
 }

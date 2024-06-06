@@ -9,3 +9,10 @@ import { PettersRegisterImagesService } from './petter.register.images.service';
     exports: [PettersRegisterImagesService],
   })
 export class PettersRegisterImageModule {}
+
+
+export type PetterRegisterImagesDTO = {
+  petterId: string;
+  images: Express.Multer.File[]; 
+  description?: string;
+};
