@@ -15,8 +15,8 @@ export class UsersLoginController {
   @Post('login')
   async login(@Body() data: UsersLoginDTO) {
     try {
-      const { accessToken } = await this.usersLoginService.login(data);
-      return { accessToken };
+      const { accessToken, userId } = await this.usersLoginService.login(data);
+      return { accessToken, userId };
     } catch (error) {
       if (error instanceof HttpException) {
         throw error;

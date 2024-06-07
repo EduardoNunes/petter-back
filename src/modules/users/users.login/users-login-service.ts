@@ -40,7 +40,7 @@ export class UsersLoginService {
     const accessToken = jwt.sign(payload, jwtConstants.secret, {
       expiresIn: jwtConstants.expiresIn,
     });
-
-    return { accessToken };
+    console.log("USER ID", user.id)
+    return { accessToken, userId: user.id };
   }
 }
