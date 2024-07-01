@@ -14,9 +14,10 @@ model Users {
   password     String
   profileImage String?
 
-  userInfo   UserInfo?
-  PetterInfo PetterInfo[]
-  Like       Like[]
+  userInfo             UserInfo?
+  PetterInfo           PetterInfo[]
+  Like                 Like[]
+  PetterImagesTimeline PetterImagesTimeline[]
 }
 
 model UserInfo {
@@ -46,7 +47,8 @@ model PetterInfo {
   userId      Int
   user        Users  @relation(fields: [userId], references: [id])
 
-  PetterImages PetterImages[] @relation("PetterInfoToPetterImages")
+  PetterImages         PetterImages[]         @relation("PetterInfoToPetterImages")
+  PetterImagesTimeline PetterImagesTimeline[]
 
   @@map("petter_infos")
 }
@@ -69,4 +71,18 @@ model Like {
   image     PetterImages @relation(fields: [imageId], references: [id])
   imageId   Int
   createdAt DateTime     @default(now())
+}
+
+model PetterImagesTimeline {
+  id           Int    @id @default(autoincrement())
+  description  String
+  likes        Int
+  comments     Int
+  url          String
+
+  userId       Int
+  user         Users     @relation(fields: [userId], references: [id])
+
+  petterInfoId Int
+  petterInfo   PetterInfo @relation(fields: [petterInfoId], references: [id])
 }

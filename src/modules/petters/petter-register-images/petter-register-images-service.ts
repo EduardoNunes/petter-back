@@ -26,11 +26,12 @@ export class PettersRegisterImagesService {
       Body: file.buffer,
       ContentType: file.mimetype,
     };
-
+    console.log('PARAMS', params);
     try {
       const uploadResult = await this.s3.upload(params).promise();
       return uploadResult.Location;
     } catch (error) {
+      console.log('ERROR', error);
       throw new HttpException(
         'Erro ao fazer upload da imagem para o S3',
         HttpStatus.INTERNAL_SERVER_ERROR,

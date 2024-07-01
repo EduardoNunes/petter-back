@@ -6,6 +6,7 @@ import { PetterRegisterInfosModule } from './modules/petters/petter-register-inf
 import { UserRegisterInfosModule } from './modules/users/user-register-infos/user-register-infos-module';
 import { PettersRegisterImageModule } from './modules/petters/petter-register-images/petter-register-images-module';
 import { ShowCardTimelineModule } from './modules/timeline/show-card-timeline/show-card-timeline.module';
+import { PetterImageTimelineModule } from './modules/petter-image-timeline/petter-image-timeline.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { ShowCardTimelineModule } from './modules/timeline/show-card-timeline/sh
     PetterRegisterInfosModule,
     PettersRegisterImageModule,
     ShowCardTimelineModule,
+    PetterImageTimelineModule,
   ],
   providers: [],
   controllers: [],
