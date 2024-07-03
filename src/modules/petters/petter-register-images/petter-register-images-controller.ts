@@ -25,6 +25,6 @@ export class PettersRegisterImagesController {
     return this.pettersRegisterImagesService.createPetterRegisterImage(
       data.petterId,
       data,
-    ); //
+    );
   }
 }

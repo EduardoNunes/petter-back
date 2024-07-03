@@ -76,8 +76,6 @@ model Like {
 model PetterImagesTimeline {
   id           Int    @id @default(autoincrement())
   description  String
-  likes        Int
-  comments     Int
   url          String
 
   userId       Int

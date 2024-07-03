@@ -29,7 +29,7 @@ exports.AppModule = AppModule = __decorate([
             petter_register_infos_module_1.PetterRegisterInfosModule,
             petter_register_images_module_1.PettersRegisterImageModule,
             show_card_timeline_module_1.ShowCardTimelineModule,
-            petter_image_timeline_module_1.PetterImageInfosModule,
+            petter_image_timeline_module_1.PetterImageTimelineModule,
         ],
         providers: [],
         controllers: [],
