@@ -10,7 +10,6 @@ dotenv.config();
 @Injectable()
 export class PetterImageTimelineService {
   private s3: AWS.S3;
-
   constructor(private prisma: PrismaService) {
     this.s3 = new AWS.S3({
       accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -26,7 +25,7 @@ export class PetterImageTimelineService {
       Body: file.buffer,
       ContentType: file.mimetype,
     };
-    console.log('PARAMS', params);
+
     try {
       const uploadResult = await this.s3.upload(params).promise();
       return uploadResult.Location;

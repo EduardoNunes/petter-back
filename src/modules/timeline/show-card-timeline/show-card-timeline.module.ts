@@ -6,6 +6,5 @@ import { PrismaService } from 'src/database/PrismaService';
 @Module({
   providers: [ShowCardTimelineService, PrismaService],
   controllers: [ShowCardTimelineController],
-
 })
 export class ShowCardTimelineModule {}

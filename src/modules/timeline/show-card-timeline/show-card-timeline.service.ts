@@ -1,8 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/database/PrismaService';
 import * as AWS from 'aws-sdk';
-import { v4 as uuidv4 } from 'uuid';
-import * as dotenv from 'dotenv';
 
 @Injectable()
 export class ShowCardTimelineService {
@@ -18,7 +16,7 @@ export class ShowCardTimelineService {
 
   async getTop10PetterImages() {
     try {
-      const top10Images = await this.prisma.petterImages.findMany({
+      const top10Images = await this.prisma.petterImagesTimeline.findMany({
         take: 10,
         orderBy: {
           id: 'desc',
@@ -29,7 +27,6 @@ export class ShowCardTimelineService {
         return `${image.url}`;
       });
 
-      console.log('TOP 10 Imagens1:', publicImageUrls);
       return publicImageUrls;
     } catch (error) {
       throw new Error(

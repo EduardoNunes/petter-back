@@ -3,4 +3,4 @@ export type UsersLoginDTO = {
   email: string;
   password: string;
   profileImage?: string;
-}
+};

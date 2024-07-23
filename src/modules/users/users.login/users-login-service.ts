@@ -30,6 +30,10 @@ export class UsersLoginService {
       );
     }
 
+    const petterInfo = await this.prisma.petterInfo.findFirst({
+      where: { userId: user.id },
+    });
+
     const payload = {
       id: user.id,
       name: user.name,
@@ -40,7 +44,11 @@ export class UsersLoginService {
     const accessToken = jwt.sign(payload, jwtConstants.secret, {
       expiresIn: jwtConstants.expiresIn,
     });
-    console.log("USER ID", user.id)
-    return { accessToken, userId: user.id };
+
+    return {
+      accessToken,
+      userId: user.id,
+      petterInfo,
+    };
   }
 }
