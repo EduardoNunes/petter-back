@@ -7,9 +7,7 @@ import { UserRegisterInfosModule } from './modules/users/user-register-infos/use
 import { PettersRegisterImageModule } from './modules/petters/petter-register-images/petter-register-images-module';
 import { ShowCardTimelineModule } from './modules/timeline/show-card-timeline/show-card-timeline.module';
 import { PetterImageTimelineModule } from './modules/timeline/post-petter-image-timeline/petter-image-timeline.module';
-import { PetterImagesProfileController } from './modules/petters/petter-images-profile/show-images-profile.controller';
-import { PetterImagesProfileService } from './modules/petters/petter-images-profile/show-images-profile.service';
-import { PetterImagesProfileModule } from './modules/petters/petter-images-profile/show-images-profile.module';
+import { ShowImagesProfileModule } from './modules/petters/petter-images-profile/show-images-profile.module';
 
 @Module({
   imports: [
@@ -21,9 +19,9 @@ import { PetterImagesProfileModule } from './modules/petters/petter-images-profi
     PettersRegisterImageModule,
     ShowCardTimelineModule,
     PetterImageTimelineModule,
-    PetterImagesProfileModule,
+    ShowImagesProfileModule,
   ],
-  providers: [PetterImagesProfileService],
-  controllers: [PetterImagesProfileController],
+  providers: [],
+  controllers: [],
 })
 export class AppModule {}

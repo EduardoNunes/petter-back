@@ -19,7 +19,7 @@ export class ShowImagesProfileService {
     try {
       const ShowImagesProfileDTO = await this.prisma.petterImages.findMany({
         where: {
-          petterId: dto.petterId,
+          petterId: Number(dto.petterId),
         },
         take: 20,
         orderBy: {
