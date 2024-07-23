@@ -44,6 +44,7 @@ model PetterInfo {
   petterKind  String
   petterBreed String
   petterBirth String
+  profileImage String?
   userId      Int
   user        Users  @relation(fields: [userId], references: [id])
 
@@ -52,6 +53,7 @@ model PetterInfo {
 
   @@map("petter_infos")
 }
+
 
 model PetterImages {
   id          Int        @id @default(autoincrement())

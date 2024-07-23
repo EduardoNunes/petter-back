@@ -15,7 +15,7 @@ const petter_register_infos_module_1 = require("./modules/petters/petter-registe
 const user_register_infos_module_1 = require("./modules/users/user-register-infos/user-register-infos-module");
 const petter_register_images_module_1 = require("./modules/petters/petter-register-images/petter-register-images-module");
 const show_card_timeline_module_1 = require("./modules/timeline/show-card-timeline/show-card-timeline.module");
-const petter_image_timeline_module_1 = require("./modules/petter-image-timeline/petter-image-timeline.module");
+const petter_image_timeline_module_1 = require("./modules/timeline/post-petter-image-timeline/petter-image-timeline.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
