@@ -6,6 +6,5 @@ import { PrismaService } from 'src/database/PrismaService';
 @Module({
   controllers: [PetterRegisterInfosController],
   providers: [PetterRegisterInfosService, PrismaService],
-  exports: [PetterRegisterInfosService],
 })
 export class PetterRegisterInfosModule {}

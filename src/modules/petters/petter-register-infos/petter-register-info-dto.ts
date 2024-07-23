@@ -4,4 +4,5 @@ export type PetterRegisterInfosDTO = {
   petterKind: string;
   petterBreed: string;
   petterBirth: string;
+  profileImageFile: Express.Multer.File;
 };

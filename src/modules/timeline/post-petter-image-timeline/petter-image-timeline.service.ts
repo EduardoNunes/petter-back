@@ -1,15 +1,16 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/database/PrismaService';
-import { PetterImageTimelineDTO } from './petter-image-timeline-dto';
 import * as AWS from 'aws-sdk';
-import { v4 as uuidv4 } from 'uuid';
 import * as dotenv from 'dotenv';
+import { PrismaService } from 'src/database/PrismaService';
+import { v4 as uuidv4 } from 'uuid';
+import { PetterImageTimelineDTO } from './petter-image-timeline-dto';
 
 dotenv.config();
 
 @Injectable()
 export class PetterImageTimelineService {
   private s3: AWS.S3;
+
   constructor(private prisma: PrismaService) {
     this.s3 = new AWS.S3({
       accessKeyId: process.env.AWS_ACCESS_KEY_ID,
