@@ -1,12 +1,12 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/database/PrismaService';
-import { UserRegisterInfosDTO } from './user-register-info-dto';
+import { UserInfosDTO } from './user-info-dto';
 
 @Injectable()
-export class UserRegisterInfosService {
+export class UserInfosService {
   constructor(private prisma: PrismaService) {}
 
-  async createUserInfos(data: UserRegisterInfosDTO) {
+  async createUserInfos(data: UserInfosDTO) {
     const userExist = await this.prisma.users.findFirst({
       where: {
         email: data.email,
@@ -49,5 +49,25 @@ export class UserRegisterInfosService {
     });
 
     return userInfo;
+  }
+
+  async findOne(userId: number): Promise<any | undefined> {
+    const user = await this.prisma.userInfo.findFirst({
+      where: { userId },
+      select: {
+        id: true,
+        userId: true,
+        date: true,
+        gender: true,
+        phone: true,
+        cep: true,
+        neighborhood: true,
+        ddd: true,
+        locality: true,
+        publicPlace: true,
+        uf: true,
+      },
+    });
+    return user;
   }
 }

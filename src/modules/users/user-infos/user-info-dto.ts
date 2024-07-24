@@ -1,4 +1,5 @@
-export type UserRegisterInfosDTO = {
+export type UserInfosDTO = {
+  userId: number;
   email: string;
   date: string;
   gender: string;

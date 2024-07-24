@@ -1,9 +1,9 @@
-export type PetterRegisterInfosDTO = {
+export type PetterInfosDTO = {
   email: string;
   petterName: string;
   petterKind: string;
   petterBreed: string;
   petterBirth: string;
   profileImageFile: Express.Multer.File;
-  descriptionBio: string;
+  descriptionBio?: string;
 };

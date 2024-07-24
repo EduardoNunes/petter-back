@@ -9,14 +9,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
-const users_login_module_1 = require("./modules/users/users.login/users-login-module");
-const users_register_module_1 = require("./modules/users/users.register-credentials/users-register-module");
-const petter_register_infos_module_1 = require("./modules/petters/petter-register-infos/petter-register-infos-module");
-const user_register_infos_module_1 = require("./modules/users/user-register-infos/user-register-infos-module");
-const petter_register_images_module_1 = require("./modules/petters/petter-register-images/petter-register-images-module");
-const show_card_timeline_module_1 = require("./modules/timeline/show-card-timeline/show-card-timeline.module");
-const petter_image_timeline_module_1 = require("./modules/timeline/post-petter-image-timeline/petter-image-timeline.module");
 const show_images_profile_module_1 = require("./modules/petters/petter-images-profile/show-images-profile.module");
+const petter_infos_module_1 = require("./modules/petters/petter-infos/petter-infos-module");
+const petter_register_images_module_1 = require("./modules/petters/petter-register-images/petter-register-images-module");
+const petter_image_timeline_module_1 = require("./modules/timeline/post-petter-image-timeline/petter-image-timeline.module");
+const show_card_timeline_module_1 = require("./modules/timeline/show-card-timeline/show-card-timeline.module");
+const user_infos_module_1 = require("./modules/users/user-infos/user-infos-module");
+const users_credentials_module_1 = require("./modules/users/users-credentials/users-credentials-module");
+const users_login_module_1 = require("./modules/users/users.login/users-login-module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -24,10 +24,10 @@ exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
             config_1.ConfigModule.forRoot({ isGlobal: true }),
-            users_register_module_1.UsersRegisterCredentialsModule,
+            users_credentials_module_1.UsersCredentialsModule,
             users_login_module_1.UsersLoginModule,
-            user_register_infos_module_1.UserRegisterInfosModule,
-            petter_register_infos_module_1.PetterRegisterInfosModule,
+            user_infos_module_1.UserInfosModule,
+            petter_infos_module_1.PetterInfosModule,
             petter_register_images_module_1.PettersRegisterImageModule,
             show_card_timeline_module_1.ShowCardTimelineModule,
             petter_image_timeline_module_1.PetterImageTimelineModule,
