@@ -44,7 +44,8 @@ model PetterInfo {
   petterKind  String
   petterBreed String
   petterBirth String
-  profileImage String?
+  profileImage String @default("")
+  descriptionBio String @default("")
   userId      Int
   user        Users  @relation(fields: [userId], references: [id])
 

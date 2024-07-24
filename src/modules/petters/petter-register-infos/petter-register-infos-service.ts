@@ -75,6 +75,7 @@ export class PetterRegisterInfosService {
         petterBreed: data.petterBreed,
         petterBirth: data.petterBirth,
         profileImage: profileUrl,
+        descriptionBio: data.descriptionBio,
         user: {
           connect: { id: userExist.id },
         },
