@@ -1,10 +1,14 @@
 import {
   Body,
   Controller,
+  Get,
+  HttpException,
+  HttpStatus,
   Param,
   ParseIntPipe,
   Patch,
   Post,
+  Query,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
@@ -35,5 +39,13 @@ export class PetterInfosController {
     @Body('descriptionBio') descriptionBio: string,
   ) {
     return this.petterInfosService.updateDescriptionBio(userId, petterId, descriptionBio);
+  }
+
+  @Get()
+  async findOne(@Query('petterId', ParseIntPipe) petterId: number) {
+    if (!petterId) {
+      throw new HttpException('PetterId is required', HttpStatus.BAD_REQUEST);
+    }
+    return this.petterInfosService.findOne(petterId);
   }
 }

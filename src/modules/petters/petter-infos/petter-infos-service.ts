@@ -94,4 +94,19 @@ export class PetterInfosService {
       data: { descriptionBio },
     });
   }
+
+  async findOne(petterId: number): Promise<any | undefined> {
+    const petter = await this.prisma.petterInfo.findFirst({
+      where: { id: petterId },
+      select: {
+        petterName: true,
+        petterKind: true,
+        petterBreed: true,
+        petterBirth: true,
+        profileImage: true,
+        descriptionBio: true,
+      },
+    });
+    return petter;
+  }
 }
