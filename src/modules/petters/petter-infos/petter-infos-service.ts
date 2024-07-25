@@ -86,7 +86,6 @@ export class PetterInfosService {
   }
 
   async updateDescriptionBio(userId: number, petterId: number, descriptionBio: string) {
-    console.log('ENTROU AQUI', userId, petterId);
     return this.prisma.petterInfo.update({
       where: {
         userId: userId,
