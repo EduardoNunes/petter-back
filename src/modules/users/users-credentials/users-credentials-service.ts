@@ -30,12 +30,14 @@ export class UsersService {
         email: data.email,
         password: hash,
         profileImage: data.profileImage,
+        loggedBy: data.loggedBy,
       },
       select: {
         id: true,
         name: true,
         email: true,
         profileImage: true,
+        loggedBy: true,
       },
     });
 
@@ -50,6 +52,7 @@ export class UsersService {
         name: true,
         email: true,
         profileImage: true,
+        loggedBy: true,
       },
     });
     return user;

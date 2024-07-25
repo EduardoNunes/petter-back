@@ -28,11 +28,12 @@ export class PetterInfosController {
     return this.petterInfosService.createPetterInfos(data);
   }
 
-  @Patch('/:id/description-bio')
+  @Patch('/:userId/:petterId/description-bio')
   async updateDescriptionBio(
-    @Param('id', ParseIntPipe) id: number,
+    @Param('userId', ParseIntPipe) userId: number,
+    @Param('petterId', ParseIntPipe) petterId: number,
     @Body('descriptionBio') descriptionBio: string,
   ) {
-    return this.petterInfosService.updateDescriptionBio(id, descriptionBio);
+    return this.petterInfosService.updateDescriptionBio(userId, petterId, descriptionBio);
   }
 }

@@ -85,30 +85,14 @@ export class PetterInfosService {
     return petterInfo;
   }
 
-  async updateDescriptionBio(petterId: number, descriptionBio: string) {
-    try {
-      // Verifica se o PetterInfo existe
-      const petterInfo = await this.prisma.petterInfo.findUnique({
-        where: { id: petterId },
-      });
-
-      if (!petterInfo) {
-        throw new HttpException('Petter não encontrado.', HttpStatus.NOT_FOUND);
-      }
-
-      // Atualiza apenas o campo descriptionBio
-      const updatedPetterInfo = await this.prisma.petterInfo.update({
-        where: { id: petterId },
-        data: { descriptionBio },
-      });
-
-      return updatedPetterInfo;
-    } catch (error) {
-      console.error('ERROR', error);
-      throw new HttpException(
-        'Erro ao atualizar a descrição.',
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
-    }
+  async updateDescriptionBio(userId: number, petterId: number, descriptionBio: string) {
+    console.log('ENTROU AQUI', userId, petterId);
+    return this.prisma.petterInfo.update({
+      where: {
+        userId: userId,
+        id: petterId,
+      },
+      data: { descriptionBio },
+    });
   }
 }
