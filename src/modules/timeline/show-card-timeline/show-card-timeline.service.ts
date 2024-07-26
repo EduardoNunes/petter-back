@@ -23,11 +23,7 @@ export class ShowCardTimelineService {
         },
       });
 
-      const publicImageUrls = top10Images.map((image) => {
-        return `${image.url}`;
-      });
-
-      return publicImageUrls;
+      return top10Images;
     } catch (error) {
       throw new Error(
         `Você já viu todas as imagens, poste alguma ou volte mais tarde.: ${error.message}`,
