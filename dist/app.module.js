@@ -17,8 +17,6 @@ const show_card_timeline_module_1 = require("./modules/timeline/show-card-timeli
 const user_infos_module_1 = require("./modules/users/user-infos/user-infos-module");
 const users_credentials_module_1 = require("./modules/users/users-credentials/users-credentials-module");
 const users_login_module_1 = require("./modules/users/users.login/users-login-module");
-const like_post_timeline_controller_1 = require("./modules/timeline/like-post-timeline/like-post-timeline.controller");
-const like_post_timeline_service_1 = require("./modules/timeline/like-post-timeline/like-post-timeline.service");
 const like_post_timeline_module_1 = require("./modules/timeline/like-post-timeline/like-post-timeline.module");
 let AppModule = class AppModule {
 };
@@ -37,8 +35,8 @@ exports.AppModule = AppModule = __decorate([
             show_images_profile_module_1.ShowImagesProfileModule,
             like_post_timeline_module_1.LikePostTimelineModule,
         ],
-        providers: [like_post_timeline_service_1.LikePostTimelineService],
-        controllers: [like_post_timeline_controller_1.LikePostTimelineController],
+        providers: [],
+        controllers: [],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map

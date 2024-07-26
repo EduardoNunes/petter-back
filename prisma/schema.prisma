@@ -52,6 +52,7 @@ model PetterInfo {
 
   PetterImages         PetterImages[]         @relation("PetterInfoToPetterImages")
   PetterImagesTimeline PetterImagesTimeline[]
+  Like                 Like[]                 @relation("PetterInfoToLike")
 
   @@map("petter_infos")
 }
@@ -62,18 +63,28 @@ model PetterImages {
   description String?
   petterId    Int
   petter      PetterInfo @relation(fields: [petterId], references: [id], name: "PetterInfoToPetterImages")
-  Like        Like[]
+  Like        Like[]     @relation("PetterImagesToLike")
 
   @@map("petter_images")
 }
 
 model Like {
-  id        Int          @id @default(autoincrement())
-  user      Users        @relation(fields: [userId], references: [id])
-  userId    Int
-  image     PetterImages @relation(fields: [imageId], references: [id])
-  imageId   Int
-  createdAt DateTime     @default(now())
+  id           Int      @id @default(autoincrement())
+  userId       Int
+  imageId      Int?
+  petterInfoId Int
+  timelineId   Int?
+  createdAt    DateTime @default(now())
+
+  user       Users                 @relation(fields: [userId], references: [id])
+  image      PetterImages?         @relation(fields: [imageId], references: [id], name: "PetterImagesToLike")
+  petterInfo PetterInfo            @relation(fields: [petterInfoId], references: [id], name: "PetterInfoToLike")
+  timeline   PetterImagesTimeline? @relation(fields: [timelineId], references: [id], name: "PetterImagesTimelineToLike")
+
+  @@index([userId])
+  @@index([imageId])
+  @@index([petterInfoId])
+  @@index([timelineId])
 }
 
 model PetterImagesTimeline {
@@ -86,4 +97,5 @@ model PetterImagesTimeline {
 
   petterInfoId Int
   petterInfo   PetterInfo @relation(fields: [petterInfoId], references: [id])
+  Like         Like[]     @relation("PetterImagesTimelineToLike")
 }

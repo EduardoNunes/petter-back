@@ -8,9 +8,8 @@ import { ShowCardTimelineModule } from './modules/timeline/show-card-timeline/sh
 import { UserInfosModule } from './modules/users/user-infos/user-infos-module';
 import { UsersCredentialsModule } from './modules/users/users-credentials/users-credentials-module';
 import { UsersLoginModule } from './modules/users/users.login/users-login-module';
-import { LikePostTimelineController } from './modules/timeline/like-post-timeline/like-post-timeline.controller';
-import { LikePostTimelineService } from './modules/timeline/like-post-timeline/like-post-timeline.service';
 import { LikePostTimelineModule } from './modules/timeline/like-post-timeline/like-post-timeline.module';
+
 
 @Module({
   imports: [
@@ -25,7 +24,7 @@ import { LikePostTimelineModule } from './modules/timeline/like-post-timeline/li
     ShowImagesProfileModule,
     LikePostTimelineModule,
   ],
-  providers: [LikePostTimelineService],
-  controllers: [LikePostTimelineController],
+  providers: [],
+  controllers: [],
 })
 export class AppModule {}
