@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { LikePostTimelineService } from './like-post-timeline.service';
 import { LikePostTimeLineDTO } from './like-post-timeline-dto';
 
@@ -11,5 +11,10 @@ export class LikePostTimelineController {
   @Post()
   async create(@Body() data: LikePostTimeLineDTO) {
     return this.likePostTimelineService.createLikePostTimeline(data);
+  }
+
+  @Get('likes-count')
+  async getLikesCount(@Query() query: LikePostTimeLineDTO) {
+    return await this.likePostTimelineService.getLikesCount(query);
   }
 }

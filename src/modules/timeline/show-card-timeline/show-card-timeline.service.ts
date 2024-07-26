@@ -21,9 +21,21 @@ export class ShowCardTimelineService {
         orderBy: {
           id: 'desc',
         },
+        include: {
+          Like: {
+            select: {
+              id: true,
+            },
+          },
+        },
       });
 
-      return top10Images;
+      const imagesWithLikesCount = top10Images.map((image) => ({
+        ...image,
+        likesCount: image.Like.length,
+      }));
+
+      return imagesWithLikesCount;
     } catch (error) {
       throw new Error(
         `Você já viu todas as imagens, poste alguma ou volte mais tarde.: ${error.message}`,
