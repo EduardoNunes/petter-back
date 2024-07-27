@@ -3,4 +3,5 @@ export type LikePostTimeLineDTO = {
   petterInfoId: number;
   imageId?: number;
   timelineId?: number;
+  liked?: boolean;
 };

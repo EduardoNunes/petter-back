@@ -55,19 +55,63 @@ export class LikePostTimelineService {
       );
     }
 
-    const like = await this.prisma.like.create({
-      data: {
+    const currentLikeExist = await this.prisma.like.findFirst({
+      where: {
         userId: data.userId,
-        imageId: data.imageId || null,
         petterInfoId: data.petterInfoId,
-        timelineId: data.timelineId || null,
+        imageId: data.imageId || undefined,
+        timelineId: data.timelineId || undefined,
       },
     });
 
+    let like;
+    if (currentLikeExist) {
+      if (data.imageId) {
+        like = await this.prisma.like.update({
+          where: {
+            userId_petterInfoId_imageId: {
+              userId: data.userId,
+              petterInfoId: data.petterInfoId,
+              imageId: data.imageId,
+            },
+          },
+          data: {
+            liked: !currentLikeExist.liked,
+          },
+        });
+      } else if (data.timelineId) {
+        like = await this.prisma.like.update({
+          where: {
+            userId_petterInfoId_timelineId: {
+              userId: data.userId,
+              petterInfoId: data.petterInfoId,
+              timelineId: data.timelineId,
+            },
+          },
+          data: {
+            liked: !currentLikeExist.liked,
+          },
+        });
+      } else {
+        throw new Error('Nem imageId nem timelineId foram fornecidos.');
+      }
+    } else {
+      like = await this.prisma.like.create({
+        data: {
+          userId: data.userId,
+          petterInfoId: data.petterInfoId,
+          imageId: data.imageId || null,
+          timelineId: data.timelineId || null,
+          liked: true,
+        },
+      });
+    }
+
     const likeCount = await this.prisma.like.count({
       where: {
-        imageId: data.imageId || undefined,
-        timelineId: data.timelineId || undefined,
+        imageId: data.imageId || null,
+        timelineId: data.timelineId || null,
+        liked: true,
       },
     });
 

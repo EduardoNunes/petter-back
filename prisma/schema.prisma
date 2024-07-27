@@ -75,6 +75,7 @@ model Like {
   petterInfoId Int
   timelineId   Int?
   createdAt    DateTime @default(now())
+  liked        Boolean  @default(false)
 
   user       Users                 @relation(fields: [userId], references: [id])
   image      PetterImages?         @relation(fields: [imageId], references: [id], name: "PetterImagesToLike")
@@ -85,6 +86,8 @@ model Like {
   @@index([imageId])
   @@index([petterInfoId])
   @@index([timelineId])
+  @@unique([userId, petterInfoId, timelineId])
+  @@unique([userId, petterInfoId, imageId])
 }
 
 model PetterImagesTimeline {

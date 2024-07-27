@@ -23,8 +23,8 @@ export class ShowCardTimelineService {
         },
         include: {
           Like: {
-            select: {
-              id: true,
+            where: {
+              liked: true,
             },
           },
         },
