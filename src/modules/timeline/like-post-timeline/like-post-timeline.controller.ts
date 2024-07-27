@@ -12,9 +12,4 @@ export class LikePostTimelineController {
   async create(@Body() data: LikePostTimeLineDTO) {
     return this.likePostTimelineService.createLikePostTimeline(data);
   }
-
-  @Get('likes-count')
-  async getLikesCount(@Query() query: LikePostTimeLineDTO) {
-    return await this.likePostTimelineService.getLikesCount(query);
-  }
 }

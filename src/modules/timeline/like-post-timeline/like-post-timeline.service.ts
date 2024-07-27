@@ -64,20 +64,13 @@ export class LikePostTimelineService {
       },
     });
 
-    return like;
-  }
+    const likeCount = await this.prisma.like.count({
+      where: {
+        imageId: data.imageId || undefined,
+        timelineId: data.timelineId || undefined,
+      },
+    });
 
-  async getLikesCount(dto: LikePostTimeLineDTO): Promise<number> {
-    try {
-      const likesCount = await this.prisma.like.count({
-        where: {
-          timelineId: Number(dto.timelineId),
-        },
-      });
-
-      return likesCount;
-    } catch (error) {
-      throw new Error(`Não foi possível fazer a contagem. ${error.message}`);
-    }
+    return { like, likeCount };
   }
 }
