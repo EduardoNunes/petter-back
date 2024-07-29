@@ -3,13 +3,13 @@ import { ConfigModule } from '@nestjs/config';
 import { ShowImagesProfileModule } from './modules/petters/petter-images-profile/show-images-profile.module';
 import { PetterInfosModule } from './modules/petters/petter-infos/petter-infos-module';
 import { PettersRegisterImageModule } from './modules/petters/petter-register-images/petter-register-images-module';
+import { CommentPostTimelineModule } from './modules/timeline/comment-post-timeline/comment-post-timeline.module';
+import { LikePostTimelineModule } from './modules/timeline/like-post-timeline/like-post-timeline.module';
 import { PetterImageTimelineModule } from './modules/timeline/post-petter-image-timeline/petter-image-timeline.module';
 import { ShowCardTimelineModule } from './modules/timeline/show-card-timeline/show-card-timeline.module';
 import { UserInfosModule } from './modules/users/user-infos/user-infos-module';
 import { UsersCredentialsModule } from './modules/users/users-credentials/users-credentials-module';
 import { UsersLoginModule } from './modules/users/users.login/users-login-module';
-import { LikePostTimelineModule } from './modules/timeline/like-post-timeline/like-post-timeline.module';
-
 
 @Module({
   imports: [
@@ -23,6 +23,7 @@ import { LikePostTimelineModule } from './modules/timeline/like-post-timeline/li
     PetterImageTimelineModule,
     ShowImagesProfileModule,
     LikePostTimelineModule,
+    CommentPostTimelineModule,
   ],
   providers: [],
   controllers: [],

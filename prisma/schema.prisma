@@ -19,6 +19,7 @@ model Users {
   PetterInfo           PetterInfo[]
   Like                 Like[]
   PetterImagesTimeline PetterImagesTimeline[]
+  Comment              Comment[]
 }
 
 model UserInfo {
@@ -53,6 +54,7 @@ model PetterInfo {
   PetterImages         PetterImages[]         @relation("PetterInfoToPetterImages")
   PetterImagesTimeline PetterImagesTimeline[]
   Like                 Like[]                 @relation("PetterInfoToLike")
+  Comment              Comment[]              @relation("PetterInfoToComment")
 
   @@map("petter_infos")
 }
@@ -64,6 +66,7 @@ model PetterImages {
   petterId    Int
   petter      PetterInfo @relation(fields: [petterId], references: [id], name: "PetterInfoToPetterImages")
   Like        Like[]     @relation("PetterImagesToLike")
+  Comment     Comment[]  @relation("PetterImagesToComment")
 
   @@map("petter_images")
 }
@@ -82,12 +85,12 @@ model Like {
   petterInfo PetterInfo            @relation(fields: [petterInfoId], references: [id], name: "PetterInfoToLike")
   timeline   PetterImagesTimeline? @relation(fields: [timelineId], references: [id], name: "PetterImagesTimelineToLike")
 
+  @@unique([userId, petterInfoId, timelineId])
+  @@unique([userId, petterInfoId, imageId])
   @@index([userId])
   @@index([imageId])
   @@index([petterInfoId])
   @@index([timelineId])
-  @@unique([userId, petterInfoId, timelineId])
-  @@unique([userId, petterInfoId, imageId])
 }
 
 model PetterImagesTimeline {
@@ -101,4 +104,27 @@ model PetterImagesTimeline {
   petterInfoId Int
   petterInfo   PetterInfo @relation(fields: [petterInfoId], references: [id])
   Like         Like[]     @relation("PetterImagesTimelineToLike")
+  Comment      Comment[]  @relation("PetterImagesTimelineToComment")
+}
+
+model Comment {
+  id           Int      @id @default(autoincrement())
+  userId       Int
+  imageId      Int?
+  petterInfoId Int
+  timelineId   Int?
+  createdAt    DateTime @default(now())
+  commented    String
+
+  user       Users                 @relation(fields: [userId], references: [id])
+  image      PetterImages?         @relation(fields: [imageId], references: [id], name: "PetterImagesToComment")
+  petterInfo PetterInfo            @relation(fields: [petterInfoId], references: [id], name: "PetterInfoToComment")
+  timeline   PetterImagesTimeline? @relation(fields: [timelineId], references: [id], name: "PetterImagesTimelineToComment")
+
+  @@unique([userId, petterInfoId, timelineId])
+  @@unique([userId, petterInfoId, imageId])
+  @@index([userId])
+  @@index([imageId])
+  @@index([petterInfoId])
+  @@index([timelineId])
 }

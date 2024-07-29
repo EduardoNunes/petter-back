@@ -12,12 +12,13 @@ const config_1 = require("@nestjs/config");
 const show_images_profile_module_1 = require("./modules/petters/petter-images-profile/show-images-profile.module");
 const petter_infos_module_1 = require("./modules/petters/petter-infos/petter-infos-module");
 const petter_register_images_module_1 = require("./modules/petters/petter-register-images/petter-register-images-module");
+const comment_post_timeline_module_1 = require("./modules/timeline/comment-post-timeline/comment-post-timeline.module");
+const like_post_timeline_module_1 = require("./modules/timeline/like-post-timeline/like-post-timeline.module");
 const petter_image_timeline_module_1 = require("./modules/timeline/post-petter-image-timeline/petter-image-timeline.module");
 const show_card_timeline_module_1 = require("./modules/timeline/show-card-timeline/show-card-timeline.module");
 const user_infos_module_1 = require("./modules/users/user-infos/user-infos-module");
 const users_credentials_module_1 = require("./modules/users/users-credentials/users-credentials-module");
 const users_login_module_1 = require("./modules/users/users.login/users-login-module");
-const like_post_timeline_module_1 = require("./modules/timeline/like-post-timeline/like-post-timeline.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -34,6 +35,7 @@ exports.AppModule = AppModule = __decorate([
             petter_image_timeline_module_1.PetterImageTimelineModule,
             show_images_profile_module_1.ShowImagesProfileModule,
             like_post_timeline_module_1.LikePostTimelineModule,
+            comment_post_timeline_module_1.CommentPostTimelineModule,
         ],
         providers: [],
         controllers: [],
