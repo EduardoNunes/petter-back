@@ -121,8 +121,6 @@ model Comment {
   petterInfo PetterInfo            @relation(fields: [petterInfoId], references: [id], name: "PetterInfoToComment")
   timeline   PetterImagesTimeline? @relation(fields: [timelineId], references: [id], name: "PetterImagesTimelineToComment")
 
-  @@unique([userId, petterInfoId, timelineId])
-  @@unique([userId, petterInfoId, imageId])
   @@index([userId])
   @@index([imageId])
   @@index([petterInfoId])

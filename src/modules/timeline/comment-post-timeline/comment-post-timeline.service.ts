@@ -7,12 +7,9 @@ export class CommentPostTimelineService {
   constructor(private prisma: PrismaService) {}
 
   async showCommentsTimeline(data: CommentPostTimeLineDTO) {
-    console.log('CHAMOU');
     try {
       const showComment = await this.prisma.comment.findMany({
         where: {
-          userId: Number(data.userId),
-          petterInfoId: Number(data.petterInfoId),
           imageId: Number(data.imageId) || undefined,
           timelineId: Number(data.timelineId) || undefined,
         },
@@ -21,7 +18,6 @@ export class CommentPostTimelineService {
           id: 'desc',
         },
       });
-      console.log('ACHOU', showComment);
 
       return showComment;
     } catch (error) {
