@@ -17,6 +17,9 @@ export class CommentPostTimelineService {
         orderBy: {
           id: 'desc',
         },
+        include: {
+          petterInfo: true,
+        },
       });
 
       return showComment;
