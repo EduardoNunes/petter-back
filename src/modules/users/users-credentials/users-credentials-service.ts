@@ -53,6 +53,8 @@ export class UsersService {
         email: true,
         profileImage: true,
         loggedBy: true,
+        userInfo: true,
+        PetterInfo: true,
       },
     });
     return user;

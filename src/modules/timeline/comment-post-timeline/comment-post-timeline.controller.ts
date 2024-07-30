@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { CommentPostTimelineService } from './comment-post-timeline.service';
 import { CommentPostTimeLineDTO } from './comment-post-timeline-dto';
 
@@ -11,5 +11,10 @@ export class CommentPostTimelineController {
   @Get()
   async showCommentsTimeline(@Query() data: CommentPostTimeLineDTO) {
     return await this.commentPostTimelineService.showCommentsTimeline(data);
+  }
+
+  @Post()
+  async create(@Body() data: CommentPostTimeLineDTO) {
+    return this.commentPostTimelineService.createCommentPostTimeline(data);
   }
 }

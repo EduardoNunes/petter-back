@@ -27,4 +27,22 @@ export class CommentPostTimelineService {
       console.log('Não foi possivel carregar os comentários', error);
     }
   }
+
+  async createCommentPostTimeline(data: CommentPostTimeLineDTO) {
+    try {
+      const response = await this.prisma.comment.create({
+        data: {
+          userId: Number(data.userId),
+          petterInfoId: Number(data.petterId),
+          imageId: Number(data.imageId) || null,
+          timelineId: Number(data.timelineId) || null,
+          commented: data.commented,
+        },
+      });
+
+      console.log('Comentado com sucesso', response);
+    } catch (error) {
+      console.log('Não foi possivel salvar o comentário', error);
+    }
+  }
 }

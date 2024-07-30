@@ -1,6 +1,7 @@
 export type CommentPostTimeLineDTO = {
   userId: number;
-  petterInfoId: number;
+  petterId: number;
   imageId?: number;
   timelineId?: number;
+  commented: string;
 };
