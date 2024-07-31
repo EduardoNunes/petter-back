@@ -37,6 +37,11 @@ export class PetterInfosService {
   }
 
   async createPetterInfos(data: PetterInfosDTO) {
+    if (!data.email) {
+      console.log('Email não passado na requisição');
+      return;
+    }
+
     const userExist = await this.prisma.users.findFirst({
       where: {
         email: data.email,
@@ -67,7 +72,6 @@ export class PetterInfosService {
     }
 
     const profileUrl = await this.uploadImageToS3(data.profileImageFile);
-
     const petterInfo = await this.prisma.petterInfo.create({
       data: {
         petterName: data.petterName,
@@ -85,7 +89,11 @@ export class PetterInfosService {
     return petterInfo;
   }
 
-  async updateDescriptionBio(userId: number, petterId: number, descriptionBio: string) {
+  async updateDescriptionBio(
+    userId: number,
+    petterId: number,
+    descriptionBio: string,
+  ) {
     return this.prisma.petterInfo.update({
       where: {
         userId: userId,
