@@ -40,7 +40,15 @@ export class CommentPostTimelineService {
         },
       });
 
+      const commentsCount = await this.prisma.comment.count({
+        where: {
+          imageId: data.imageId || null,
+          timelineId: data.timelineId || null,
+        },
+      });
+
       console.log('Comentado com sucesso', response);
+      return { response, commentsCount };
     } catch (error) {
       console.log('Não foi possivel salvar o comentário', error);
     }
