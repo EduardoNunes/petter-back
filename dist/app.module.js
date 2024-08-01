@@ -9,6 +9,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
+const auth_module_1 = require("./auth/auth-module");
+const PrismaService_1 = require("./database/PrismaService");
 const show_images_profile_module_1 = require("./modules/petters/petter-images-profile/show-images-profile.module");
 const petter_infos_module_1 = require("./modules/petters/petter-infos/petter-infos-module");
 const petter_register_images_module_1 = require("./modules/petters/petter-register-images/petter-register-images-module");
@@ -18,7 +20,6 @@ const petter_image_timeline_module_1 = require("./modules/timeline/post-petter-i
 const show_card_timeline_module_1 = require("./modules/timeline/show-card-timeline/show-card-timeline.module");
 const user_infos_module_1 = require("./modules/users/user-infos/user-infos-module");
 const users_credentials_module_1 = require("./modules/users/users-credentials/users-credentials-module");
-const users_login_module_1 = require("./modules/users/users.login/users-login-module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -27,7 +28,6 @@ exports.AppModule = AppModule = __decorate([
         imports: [
             config_1.ConfigModule.forRoot({ isGlobal: true }),
             users_credentials_module_1.UsersCredentialsModule,
-            users_login_module_1.UsersLoginModule,
             user_infos_module_1.UserInfosModule,
             petter_infos_module_1.PetterInfosModule,
             petter_register_images_module_1.PettersRegisterImageModule,
@@ -36,9 +36,10 @@ exports.AppModule = AppModule = __decorate([
             show_images_profile_module_1.ShowImagesProfileModule,
             like_post_timeline_module_1.LikePostTimelineModule,
             comment_post_timeline_module_1.CommentPostTimelineModule,
+            auth_module_1.AuthModule,
         ],
-        providers: [],
         controllers: [],
+        providers: [PrismaService_1.PrismaService],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map

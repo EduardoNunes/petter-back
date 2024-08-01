@@ -24,6 +24,7 @@ export class UsersService {
     }
 
     const hash = await bcrypt.hash(data.password, this.saltOrRounds);
+    
     const user = await this.prisma.users.create({
       data: {
         name: data.name,

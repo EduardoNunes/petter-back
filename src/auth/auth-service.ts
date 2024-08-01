@@ -1,15 +1,25 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-import * as jwt from 'jsonwebtoken';
 import { PrismaService } from 'src/database/PrismaService';
-import { jwtConstants } from 'src/utils/jwt-config';
-import { UsersLoginDTO } from './users-login-dto';
+import { AuthDto } from './auth-DTO';
 
 @Injectable()
-export class UsersLoginService {
-  constructor(private prisma: PrismaService) {}
+export class AuthService {
+  private jwtExpirationTimeInSeconds: number;
 
-  async login(data: UsersLoginDTO) {
+  constructor(
+    private prisma: PrismaService,
+    private readonly jwtService: JwtService,
+    private readonly configService: ConfigService,
+  ) {
+    this.jwtExpirationTimeInSeconds = +this.configService.get<number>(
+      'JWT_EXPIRATION_TIME',
+    );
+  }
+
+  async login(data: AuthDto) {
     const user = await this.prisma.users.findFirst({
       where: { email: data.email },
     });
@@ -37,17 +47,15 @@ export class UsersLoginService {
     const payload = {
       id: user.id,
       name: user.name,
-      email: user.email,
+      sub: user.email,
       profileImage: user.profileImage,
     };
 
-    const accessToken = jwt.sign(payload, jwtConstants.secret, {
-      expiresIn: jwtConstants.expiresIn,
-    });
+    const accessToken = this.jwtService.sign(payload);
 
     return {
       accessToken,
-      userId: user.id,
+      expiresIn: this.jwtExpirationTimeInSeconds,
       petterInfo,
     };
   }

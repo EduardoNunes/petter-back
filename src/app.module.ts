@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { AuthModule } from './auth/auth-module';
+import { PrismaService } from './database/PrismaService';
 import { ShowImagesProfileModule } from './modules/petters/petter-images-profile/show-images-profile.module';
 import { PetterInfosModule } from './modules/petters/petter-infos/petter-infos-module';
 import { PettersRegisterImageModule } from './modules/petters/petter-register-images/petter-register-images-module';
@@ -9,13 +11,11 @@ import { PetterImageTimelineModule } from './modules/timeline/post-petter-image-
 import { ShowCardTimelineModule } from './modules/timeline/show-card-timeline/show-card-timeline.module';
 import { UserInfosModule } from './modules/users/user-infos/user-infos-module';
 import { UsersCredentialsModule } from './modules/users/users-credentials/users-credentials-module';
-import { UsersLoginModule } from './modules/users/users.login/users-login-module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     UsersCredentialsModule,
-    UsersLoginModule,
     UserInfosModule,
     PetterInfosModule,
     PettersRegisterImageModule,
@@ -24,8 +24,9 @@ import { UsersLoginModule } from './modules/users/users.login/users-login-module
     ShowImagesProfileModule,
     LikePostTimelineModule,
     CommentPostTimelineModule,
+    AuthModule,
   ],
-  providers: [],
   controllers: [],
+  providers: [PrismaService],
 })
 export class AppModule {}
