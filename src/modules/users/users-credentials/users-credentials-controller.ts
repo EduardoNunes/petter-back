@@ -6,6 +6,7 @@ import {
   HttpStatus,
   Post,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { UsersDTO } from './users-credentials-dto';
 import { UsersService } from './users-credentials-service';

@@ -20,8 +20,6 @@ const petter_image_timeline_module_1 = require("./modules/timeline/post-petter-i
 const show_card_timeline_module_1 = require("./modules/timeline/show-card-timeline/show-card-timeline.module");
 const user_infos_module_1 = require("./modules/users/user-infos/user-infos-module");
 const users_credentials_module_1 = require("./modules/users/users-credentials/users-credentials-module");
-const core_1 = require("@nestjs/core");
-const auth_guard_1 = require("./auth/auth-guard");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -41,13 +39,7 @@ exports.AppModule = AppModule = __decorate([
             auth_module_1.AuthModule,
         ],
         controllers: [],
-        providers: [
-            PrismaService_1.PrismaService,
-            {
-                provide: core_1.APP_GUARD,
-                useClass: auth_guard_1.AuthGuard,
-            },
-        ],
+        providers: [PrismaService_1.PrismaService],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map

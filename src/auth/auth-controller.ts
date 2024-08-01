@@ -9,14 +9,12 @@ import {
 
 import { AuthDto } from './auth-DTO';
 import { AuthService } from './auth-service';
-import { NoAuthGuard } from './no-auth-guard';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
   
   @Post('login')
-  @UseGuards(NoAuthGuard)
   async login(@Body() data: AuthDto) {
     try {
       const { accessToken, expiresIn, petterInfo } =
