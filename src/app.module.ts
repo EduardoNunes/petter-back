@@ -11,6 +11,8 @@ import { PetterImageTimelineModule } from './modules/timeline/post-petter-image-
 import { ShowCardTimelineModule } from './modules/timeline/show-card-timeline/show-card-timeline.module';
 import { UserInfosModule } from './modules/users/user-infos/user-infos-module';
 import { UsersCredentialsModule } from './modules/users/users-credentials/users-credentials-module';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from './auth/auth-guard';
 
 @Module({
   imports: [
@@ -27,6 +29,12 @@ import { UsersCredentialsModule } from './modules/users/users-credentials/users-
     AuthModule,
   ],
   controllers: [],
-  providers: [PrismaService],
+  providers: [
+    PrismaService,
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
+  ],
 })
 export class AppModule {}
