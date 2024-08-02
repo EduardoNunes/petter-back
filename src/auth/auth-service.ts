@@ -22,6 +22,10 @@ export class AuthService {
   async login(data: AuthDto) {
     const user = await this.prisma.users.findFirst({
       where: { email: data.email },
+      include: {
+        userInfo: true,
+        PetterInfo: true,
+      }
     });
 
     if (!user) {
@@ -40,10 +44,6 @@ export class AuthService {
       );
     }
 
-    const petterInfo = await this.prisma.petterInfo.findFirst({
-      where: { userId: user.id },
-    });
-
     const payload = {
       id: user.id,
       name: user.name,
@@ -56,7 +56,8 @@ export class AuthService {
     return {
       accessToken,
       expiresIn: this.jwtExpirationTimeInSeconds,
-      petterInfo,
+      petterInfo: user.PetterInfo,
+      userInfo: user.userInfo,
     };
   }
 }

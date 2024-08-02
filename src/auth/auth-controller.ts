@@ -3,8 +3,7 @@ import {
   Controller,
   HttpException,
   HttpStatus,
-  Post,
-  UseGuards,
+  Post
 } from '@nestjs/common';
 
 import { AuthDto } from './auth-DTO';
@@ -17,9 +16,9 @@ export class AuthController {
   @Post('login')
   async login(@Body() data: AuthDto) {
     try {
-      const { accessToken, expiresIn, petterInfo } =
+      const { accessToken, expiresIn, petterInfo, userInfo } =
         await this.authService.login(data);
-      return { accessToken, expiresIn, petterInfo };
+      return { accessToken, expiresIn, petterInfo, userInfo };
     } catch (error) {
       if (error instanceof HttpException) {
         throw error;
