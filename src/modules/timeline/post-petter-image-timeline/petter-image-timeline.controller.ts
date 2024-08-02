@@ -3,12 +3,15 @@ import {
   Controller,
   Post,
   UploadedFile,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { PetterImageTimelineService } from './petter-image-timeline.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { PetterImageTimelineDTO } from './petter-image-timeline-dto';
+import { AuthGuard } from 'src/auth/auth-guard';
 
+@UseGuards(AuthGuard)
 @Controller('petter-image-timeline')
 export class PetterImageTimelineController {
   constructor(

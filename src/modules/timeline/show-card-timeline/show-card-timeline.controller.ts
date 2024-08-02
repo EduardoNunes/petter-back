@@ -1,8 +1,9 @@
-import { Body, Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, UseGuards } from '@nestjs/common';
 import { ShowCardTimelineService } from './show-card-timeline.service';
 import { ShowCardtTimeLineDTO } from './show-card-timeline-dto';
+import { AuthGuard } from 'src/auth/auth-guard';
 
-
+@UseGuards(AuthGuard)
 @Controller('show-card-timeline')
 export class ShowCardTimelineController {
   constructor(

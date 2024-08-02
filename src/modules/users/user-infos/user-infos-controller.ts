@@ -6,10 +6,13 @@ import {
   HttpStatus,
   Post,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { UserInfosDTO } from './user-info-dto';
 import { UserInfosService } from './user-infos-service';
+import { AuthGuard } from 'src/auth/auth-guard';
 
+@UseGuards(AuthGuard)
 @Controller('user-infos')
 export class UserInfosController {
   constructor(private readonly userInfosService: UserInfosService) {}

@@ -1,7 +1,9 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
 import { CommentPostTimelineService } from './comment-post-timeline.service';
 import { CommentPostTimeLineDTO } from './comment-post-timeline-dto';
+import { AuthGuard } from 'src/auth/auth-guard';
 
+@UseGuards(AuthGuard)
 @Controller('comment-post-timeline')
 export class CommentPostTimelineController {
   constructor(

@@ -10,12 +10,15 @@ import {
   Post,
   Query,
   UploadedFile,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { PetterInfosDTO } from './petter-info-dto';
 import { PetterInfosService } from './petter-infos-service';
+import { AuthGuard } from 'src/auth/auth-guard';
 
+@UseGuards(AuthGuard)
 @Controller('petter-infos')
 export class PetterInfosController {
   constructor(private readonly petterInfosService: PetterInfosService) {}
