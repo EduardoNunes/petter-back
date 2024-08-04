@@ -56,6 +56,10 @@ export class AuthService {
     return {
       accessToken,
       expiresIn: this.jwtExpirationTimeInSeconds,
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      profileImage: user.profileImage,
       petterInfo: user.PetterInfo,
       userInfo: user.userInfo,
     };
