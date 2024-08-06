@@ -25,7 +25,7 @@ export class AuthService {
       include: {
         userInfo: true,
         PetterInfo: true,
-      }
+      },
     });
 
     if (!user) {
@@ -56,6 +56,31 @@ export class AuthService {
     return {
       accessToken,
       expiresIn: this.jwtExpirationTimeInSeconds,
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      profileImage: user.profileImage,
+      petterInfo: user.PetterInfo,
+      userInfo: user.userInfo,
+    };
+  }
+
+  async getUserById(id: number) {
+    const userId = typeof id === 'string' ? parseInt(id, 10) : id;
+
+    const user = await this.prisma.users.findUnique({
+      where: { id: userId },
+      include: {
+        userInfo: true,
+        PetterInfo: true,
+      },
+    });
+
+    if (!user) {
+      throw new HttpException('Usuário não encontrado', HttpStatus.NOT_FOUND);
+    }
+
+    return {
       id: user.id,
       name: user.name,
       email: user.email,
