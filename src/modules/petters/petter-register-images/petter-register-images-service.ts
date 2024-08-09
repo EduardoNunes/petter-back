@@ -65,7 +65,7 @@ export class PettersRegisterImagesService {
           petterId: Number(petterId[i]),
         },
       });
-      console.log('Novas imagens do Petter criadas:', newPetterImages);
+      console.log('Novas imagens do Petter criadas:');
     }
   }
 }
