@@ -50,6 +50,7 @@ export class AuthController {
 
   @Get('user/:id')
   async getUser(@Param('id') id: number) {
+    console.log("ATT")
     try {
       const user = await this.authService.getUserById(id);
       return user;
