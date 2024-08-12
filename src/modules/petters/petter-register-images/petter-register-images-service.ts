@@ -42,10 +42,12 @@ export class PettersRegisterImagesService {
   async createPetterRegisterImage(petterId, data: PetterRegisterImagesDTO) {
     const imageUrls: string[] = [];
 
+    console.log("PETTERS", petterId)
+
     for (let i = 0; i < data.images.length; i++) {
       const petterExist = await this.prisma.petterInfo.findUnique({
         where: {
-          id: Number(petterId[i]),
+          id: Number(petterId),
         },
       });
 
@@ -62,7 +64,7 @@ export class PettersRegisterImagesService {
       const newPetterImages = await this.prisma.petterImages.create({
         data: {
           url: imageUrl,
-          petterId: Number(petterId[i]),
+          petterId: Number(petterId),
         },
       });
       console.log('Novas imagens do Petter criadas:');

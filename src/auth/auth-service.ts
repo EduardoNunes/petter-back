@@ -5,6 +5,8 @@ import * as bcrypt from 'bcrypt';
 import { PrismaService } from 'src/database/PrismaService';
 import { AuthDto } from './auth-DTO';
 
+
+
 @Injectable()
 export class AuthService {
   private jwtExpirationTimeInSeconds: number;
