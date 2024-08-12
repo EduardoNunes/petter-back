@@ -3,8 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { PrismaService } from 'src/database/PrismaService';
-import { AuthDto } from './auth-DTO';
-
+import { AuthDto } from './auth-dto';
 
 
 @Injectable()

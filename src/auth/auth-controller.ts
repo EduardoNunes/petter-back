@@ -7,8 +7,8 @@ import {
   Param,
   Post,
 } from '@nestjs/common';
-import { AuthDto } from './auth-DTO';
 import { AuthService } from './auth-service';
+import { AuthDto } from './auth-dto';
 
 @Controller('auth')
 export class AuthController {
@@ -50,7 +50,6 @@ export class AuthController {
 
   @Get('user/:id')
   async getUser(@Param('id') id: number) {
-    console.log("ATT")
     try {
       const user = await this.authService.getUserById(id);
       return user;
