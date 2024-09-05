@@ -5,7 +5,6 @@ import * as bcrypt from 'bcrypt';
 import { PrismaService } from 'src/database/PrismaService';
 import { AuthDto } from './auth-dto';
 
-
 @Injectable()
 export class AuthService {
   private jwtExpirationTimeInSeconds: number;
@@ -81,13 +80,29 @@ export class AuthService {
       throw new HttpException('Usuário não encontrado', HttpStatus.NOT_FOUND);
     }
 
+    let petterImage: { url: string };
+
+    if (user.PetterInfo.length > 0) {
+      const petterId = user.PetterInfo[0].id;
+
+      const petterImageUrl = await this.prisma.petterImages.findFirst({
+        where: { id: petterId },
+        select: {
+          url: true,
+        },
+      });
+
+      console.log("PETTERIMAGE", user.PetterInfo[0].id)
+      petterImage = petterImageUrl;
+    }
     return {
       id: user.id,
       name: user.name,
       email: user.email,
       profileImage: user.profileImage,
-      petterInfo: user.PetterInfo,
       userInfo: user.userInfo,
+      petterInfo: user.PetterInfo,
+      petterImage: petterImage,
     };
   }
 }

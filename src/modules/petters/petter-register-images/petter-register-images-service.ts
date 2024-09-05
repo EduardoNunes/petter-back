@@ -39,32 +39,27 @@ export class PettersRegisterImagesService {
     }
   }
 
-  async createPetterRegisterImage(petterId, data: PetterRegisterImagesDTO) {
+  async createPetterRegisterImage(petterId: number, data: PetterRegisterImagesDTO) {
     const imageUrls: string[] = [];
 
-    console.log("PETTERS", petterId)
+    const petterExist = await this.prisma.petterInfo.findUnique({
+      where: {
+        id: Number(petterId[0]),
+      },
+    });
+
+    if (!petterExist) {
+      throw new HttpException('Petter não encontrado.', HttpStatus.BAD_REQUEST);
+    }
 
     for (let i = 0; i < data.images.length; i++) {
-      const petterExist = await this.prisma.petterInfo.findUnique({
-        where: {
-          id: Number(petterId),
-        },
-      });
-
-      if (!petterExist) {
-        throw new HttpException(
-          'Petter não encontrado.',
-          HttpStatus.BAD_REQUEST,
-        );
-      }
-
       const imageUrl = await this.uploadImageToS3(data.images[i]);
       imageUrls.push(imageUrl);
 
       const newPetterImages = await this.prisma.petterImages.create({
         data: {
           url: imageUrl,
-          petterId: Number(petterId),
+          petterId: Number(petterId[0]),
         },
       });
       console.log('Novas imagens do Petter criadas:');
