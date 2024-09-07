@@ -64,7 +64,15 @@ export class LikePostTimelineService {
       },
     });
 
-    let like;
+    let like: {
+      id: number;
+      userId: number;
+      imageId: number;
+      petterInfoId: number;
+      timelineId: number;
+      createdAt: Date;
+      liked: boolean;
+    };
     if (currentLikeExist) {
       if (data.imageId) {
         like = await this.prisma.like.update({

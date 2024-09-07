@@ -75,7 +75,7 @@ export class AuthService {
         PetterInfo: true,
       },
     });
-
+    
     if (!user) {
       throw new HttpException('Usuário não encontrado', HttpStatus.NOT_FOUND);
     }
@@ -86,13 +86,12 @@ export class AuthService {
       const petterId = user.PetterInfo[0].id;
 
       const petterImageUrl = await this.prisma.petterImages.findFirst({
-        where: { id: petterId },
+        where: { petterId: petterId },
         select: {
           url: true,
         },
       });
 
-      console.log("PETTERIMAGE", user.PetterInfo[0].id)
       petterImage = petterImageUrl;
     }
     return {
