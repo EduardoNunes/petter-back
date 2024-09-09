@@ -13,6 +13,7 @@ const auth_module_1 = require("./auth/auth-module");
 const PrismaService_1 = require("./database/PrismaService");
 const show_images_profile_module_1 = require("./modules/petters/petter-images-profile/show-images-profile.module");
 const petter_infos_module_1 = require("./modules/petters/petter-infos/petter-infos-module");
+const petter_profile_page_module_1 = require("./modules/petters/petter-profile-page/petter-profile-page.module");
 const petter_register_images_module_1 = require("./modules/petters/petter-register-images/petter-register-images-module");
 const comment_post_timeline_module_1 = require("./modules/timeline/comment-post-timeline/comment-post-timeline.module");
 const like_post_timeline_module_1 = require("./modules/timeline/like-post-timeline/like-post-timeline.module");
@@ -20,6 +21,7 @@ const petter_image_timeline_module_1 = require("./modules/timeline/post-petter-i
 const show_card_timeline_module_1 = require("./modules/timeline/show-card-timeline/show-card-timeline.module");
 const user_infos_module_1 = require("./modules/users/user-infos/user-infos-module");
 const users_credentials_module_1 = require("./modules/users/users-credentials/users-credentials-module");
+const search_petter_module_1 = require("./modules/search/search-petter/search-petter.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -37,6 +39,8 @@ exports.AppModule = AppModule = __decorate([
             like_post_timeline_module_1.LikePostTimelineModule,
             comment_post_timeline_module_1.CommentPostTimelineModule,
             auth_module_1.AuthModule,
+            petter_profile_page_module_1.PetterProfilePageModule,
+            search_petter_module_1.SearchPetterModule,
         ],
         controllers: [],
         providers: [PrismaService_1.PrismaService],
