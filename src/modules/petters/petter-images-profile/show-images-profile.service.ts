@@ -17,7 +17,7 @@ export class ShowImagesProfileService {
 
   async getTop20ProfileImages(dto: ShowImagesProfileDTO) {
     try {
-      const ShowImagesProfileDTO = await this.prisma.petterImages.findMany({
+      const showImagesProfile = await this.prisma.petterImages.findMany({
         where: {
           petterId: Number(dto.petterId),
         },
@@ -26,9 +26,8 @@ export class ShowImagesProfileService {
           id: 'desc',
         },
       });
-
-      const profileImageUrls = ShowImagesProfileDTO.map((image) => {
-        return `${image.url}`;
+      const profileImageUrls = showImagesProfile.map((image) => {
+        return `${image.id} ${image.url}`;
       });
 
       return profileImageUrls;
