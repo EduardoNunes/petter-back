@@ -28,6 +28,7 @@ export class ShowCardTimelineService {
               liked: true,
             },
           },
+          petterInfo: true,
           Comment: {
             where: {
               timelineId: data.timelineId,
