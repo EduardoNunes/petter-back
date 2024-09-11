@@ -10,8 +10,8 @@ export class ShowImagesProfileController {
     private readonly showImagesProfileService: ShowImagesProfileService,
   ) {}
 
-  @Get('top-20-images')
+  @Get('top-15-images')
   async getTop10ProfileImages(@Query() query: ShowImagesProfileDTO) {
-    return await this.showImagesProfileService.getTop20ProfileImages(query);
+    return await this.showImagesProfileService.getTop15ProfileImages(query);
   }
 }

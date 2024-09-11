@@ -15,22 +15,37 @@ export class ShowImagesProfileService {
     });
   }
 
-  async getTop20ProfileImages(dto: ShowImagesProfileDTO) {
+  async getTop15ProfileImages(dto: ShowImagesProfileDTO) {
+    const page = dto.page || 1;
+    const take = 15;
+    const skip = (page - 1) * take;
+
     try {
+      const totalImages = await this.prisma.petterImages.count({
+        where: {
+          petterId: Number(dto.petterId),
+        },
+      });
+
       const showImagesProfile = await this.prisma.petterImages.findMany({
         where: {
           petterId: Number(dto.petterId),
         },
-        take: 20,
+        take: take,
+        skip: skip,
         orderBy: {
           id: 'desc',
         },
       });
+
       const profileImageUrls = showImagesProfile.map((image) => {
         return `${image.id} ${image.url}`;
       });
 
-      return profileImageUrls;
+      return {
+        images: profileImageUrls,
+        total: totalImages,
+      };
     } catch (error) {
       throw new Error(`No more images. ${error.message}`);
     }

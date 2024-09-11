@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/database/PrismaService';
 import * as AWS from 'aws-sdk';
-import { ShowCardtTimeLineDTO } from './show-card-timeline-dto';
 
 @Injectable()
 export class ShowCardTimelineService {
@@ -15,10 +14,13 @@ export class ShowCardTimelineService {
     });
   }
 
-  async getTop10PetterImages(data: ShowCardtTimeLineDTO) {
+  async getImagesTimeline(page: number, limit: number) {
     try {
-      const top10Images = await this.prisma.petterImagesTimeline.findMany({
-        take: 10,
+      const skip = (page - 1) * limit;
+
+      const images = await this.prisma.petterImagesTimeline.findMany({
+        skip,
+        take: limit,
         orderBy: {
           id: 'desc',
         },
@@ -29,25 +31,20 @@ export class ShowCardTimelineService {
             },
           },
           petterInfo: true,
-          Comment: {
-            where: {
-              timelineId: data.timelineId,
-              imageId: data.imageId,
-            },
-          },
+          Comment: true,
         },
       });
 
-      const top10ImagesWithCounts = top10Images.map((image) => ({
+      const imagesWithCounts = images.map((image) => ({
         ...image,
         likesCount: image.Like.length,
         commentsCount: image.Comment.length,
       }));
 
-      return { top10ImagesWithCounts };
+      return { imagesWithCounts };
     } catch (error) {
       throw new Error(
-        `Você já viu todas as imagens, poste alguma ou volte mais tarde.: ${error.message}`,
+        `Erro ao buscar imagens: ${error.message}`,
       );
     }
   }
