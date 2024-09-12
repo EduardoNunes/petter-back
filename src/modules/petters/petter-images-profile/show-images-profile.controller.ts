@@ -11,7 +11,7 @@ export class ShowImagesProfileController {
   ) {}
 
   @Get('top-15-images')
-  async getTop10ProfileImages(@Query() query: ShowImagesProfileDTO) {
+  async getTop15ProfileImages(@Query() query: ShowImagesProfileDTO) {
     return await this.showImagesProfileService.getTop15ProfileImages(query);
   }
 }

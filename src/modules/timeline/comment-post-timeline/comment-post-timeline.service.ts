@@ -7,13 +7,18 @@ export class CommentPostTimelineService {
   constructor(private prisma: PrismaService) {}
 
   async showCommentsTimeline(data: CommentPostTimeLineDTO) {
+    const page = data.page || 1;
+    const take = 15;
+    const skip = (page - 1) * take;
+
     try {
       const showComment = await this.prisma.comment.findMany({
         where: {
           imageId: Number(data.imageId) || undefined,
           timelineId: Number(data.timelineId) || undefined,
         },
-        take: 10,
+        take: take,
+        skip: skip,
         orderBy: {
           id: 'desc',
         },
