@@ -1,4 +1,5 @@
 export type ShowImagesProfileDTO = {
-  petterId: number;
+  petterId?: number;
   page?: number;
+  petterImageId?: string;
 };

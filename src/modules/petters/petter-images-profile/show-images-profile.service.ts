@@ -50,4 +50,24 @@ export class ShowImagesProfileService {
       throw new Error(`No more images. ${error.message}`);
     }
   }
+
+  async getGalleryLikes(dto: ShowImagesProfileDTO) {
+    try {
+      const getLikes = await this.prisma.like.findMany({
+        where: {
+          imageId: Number(dto.petterImageId),
+          liked: true,
+        },
+      });
+  
+      if (!getLikes) {
+        throw new Error('Imagem não encontrada.');
+      }
+  
+      return getLikes;
+    } catch (error) {
+      throw new Error(`Erro ao buscar informações da imagem. ${error.message}`);
+    }
+  }
+  
 }

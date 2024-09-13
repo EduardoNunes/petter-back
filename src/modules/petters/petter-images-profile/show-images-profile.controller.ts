@@ -14,4 +14,9 @@ export class ShowImagesProfileController {
   async getTop15ProfileImages(@Query() query: ShowImagesProfileDTO) {
     return await this.showImagesProfileService.getTop15ProfileImages(query);
   }
+
+  @Get('petter-gallery-likes')
+  async getGalleryLikes(@Query() query: ShowImagesProfileDTO) {
+    return await this.showImagesProfileService.getGalleryLikes(query);
+  }
 }
