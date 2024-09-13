@@ -33,9 +33,18 @@ export class LikePostTimelineService {
       );
     }
 
-    let postExist;
+    let postExist: {
+      id: number;
+      description?: string;
+      url: string;
+      userId?: number;
+      petterInfoId?: number;
+      petterId?: number;
+    };
+    
+
     if (data.imageId) {
-      postExist = await this.prisma.petterImagesTimeline.findFirst({
+      postExist = await this.prisma.petterImages.findFirst({
         where: {
           id: data.imageId,
         },
@@ -47,7 +56,7 @@ export class LikePostTimelineService {
         },
       });
     }
-
+    console.log("TESTANDO", data)
     if (!postExist) {
       throw new HttpException(
         'Postagem não encontrada, parece que ela foi excluída agora pouco.',
@@ -73,6 +82,7 @@ export class LikePostTimelineService {
       createdAt: Date;
       liked: boolean;
     };
+
     if (currentLikeExist) {
       if (data.imageId) {
         like = await this.prisma.like.update({
