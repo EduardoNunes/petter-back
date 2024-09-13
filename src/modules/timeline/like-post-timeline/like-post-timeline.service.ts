@@ -56,7 +56,7 @@ export class LikePostTimelineService {
         },
       });
     }
-    console.log("TESTANDO", data)
+
     if (!postExist) {
       throw new HttpException(
         'Postagem não encontrada, parece que ela foi excluída agora pouco.',

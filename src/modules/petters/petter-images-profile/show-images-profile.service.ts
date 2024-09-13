@@ -53,10 +53,18 @@ export class ShowImagesProfileService {
 
   async getGalleryLikes(dto: ShowImagesProfileDTO) {
     try {
+      const petterImageId = Number(dto.petterImageId);
+  
       const getLikes = await this.prisma.like.findMany({
         where: {
-          imageId: Number(dto.petterImageId),
+          imageId: petterImageId,
           liked: true,
+        },
+      });
+  
+      const commentCount = await this.prisma.comment.count({
+        where: {
+          imageId: petterImageId,
         },
       });
   
@@ -64,10 +72,12 @@ export class ShowImagesProfileService {
         throw new Error('Imagem não encontrada.');
       }
   
-      return getLikes;
+      return {
+        likes: getLikes,
+        commentCount: commentCount,
+      };
     } catch (error) {
       throw new Error(`Erro ao buscar informações da imagem. ${error.message}`);
     }
   }
-  
 }

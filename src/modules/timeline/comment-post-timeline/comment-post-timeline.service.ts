@@ -44,7 +44,7 @@ export class CommentPostTimelineService {
           commented: data.commented,
         },
       });
-
+      console.log("DATA", data)
       const commentsCount = await this.prisma.comment.count({
         where: {
           imageId: data.imageId || null,
