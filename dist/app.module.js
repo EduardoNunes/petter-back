@@ -22,6 +22,7 @@ const show_card_timeline_module_1 = require("./modules/timeline/show-card-timeli
 const user_infos_module_1 = require("./modules/users/user-infos/user-infos-module");
 const users_credentials_module_1 = require("./modules/users/users-credentials/users-credentials-module");
 const search_petter_module_1 = require("./modules/search/search-petter/search-petter.module");
+const follow_unfollow_module_1 = require("./modules/follow-unfollow/follow-unfollow.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -41,6 +42,7 @@ exports.AppModule = AppModule = __decorate([
             auth_module_1.AuthModule,
             petter_profile_page_module_1.PetterProfilePageModule,
             search_petter_module_1.SearchPetterModule,
+            follow_unfollow_module_1.FollowUnfollowModule,
         ],
         controllers: [],
         providers: [PrismaService_1.PrismaService],

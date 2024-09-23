@@ -13,6 +13,7 @@ import { ShowCardTimelineModule } from './modules/timeline/show-card-timeline/sh
 import { UserInfosModule } from './modules/users/user-infos/user-infos-module';
 import { UsersCredentialsModule } from './modules/users/users-credentials/users-credentials-module';
 import { SearchPetterModule } from './modules/search/search-petter/search-petter.module';
+import { FollowUnfollowModule } from './modules/follow-unfollow/follow-unfollow.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { SearchPetterModule } from './modules/search/search-petter/search-petter
     AuthModule,
     PetterProfilePageModule,
     SearchPetterModule,
+    FollowUnfollowModule,
   ],
   controllers: [],
   providers: [PrismaService],

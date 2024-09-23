@@ -56,6 +56,9 @@ model PetterInfo {
   Like                 Like[]                 @relation("PetterInfoToLike")
   Comment              Comment[]              @relation("PetterInfoToComment")
 
+  following Follow[] @relation("Following")
+  followers Follow[] @relation("Followers")
+
   @@map("petter_infos")
 }
 
@@ -125,4 +128,18 @@ model Comment {
   @@index([imageId])
   @@index([petterInfoId])
   @@index([timelineId])
+}
+
+model Follow {
+  id         Int        @id @default(autoincrement())
+  follower   PetterInfo @relation("Following", fields: [followerId], references: [id], onDelete: Cascade)
+  followerId Int
+
+  followed   PetterInfo @relation("Followers", fields: [followedId], references: [id], onDelete: Cascade)
+  followedId Int
+
+  createdAt   DateTime @default(now())
+  isFollowing Boolean  @default(true)
+
+  @@unique([followerId, followedId])
 }
