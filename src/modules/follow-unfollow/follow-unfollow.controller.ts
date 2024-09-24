@@ -11,7 +11,7 @@ import {
 import { AuthGuard } from 'src/auth/auth-guard';
 import { FollowUnfollowService } from './follow-unfollow.service';
 
-/* @UseGuards(AuthGuard) */
+@UseGuards(AuthGuard)
 @Controller('follow-unfollow')
 export class FollowUnfollowController {
   constructor(private readonly followUnfollowService: FollowUnfollowService) {}

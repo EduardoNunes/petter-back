@@ -1,7 +1,7 @@
 import { Controller, Get, Query, UseGuards } from '@nestjs/common';
-import { ShowImagesProfileService } from './show-images-profile.service';
-import { ShowImagesProfileDTO } from './show-images-profile-dto';
 import { AuthGuard } from 'src/auth/auth-guard';
+import { ShowImagesProfileDTO } from './show-images-profile-dto';
+import { ShowImagesProfileService } from './show-images-profile.service';
 
 @UseGuards(AuthGuard)
 @Controller('show-images-profile')
