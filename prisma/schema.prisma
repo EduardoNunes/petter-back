@@ -46,6 +46,7 @@ model PetterInfo {
   petterKind     String
   petterBreed    String
   petterBirth    String
+  petterGender   String? 
   profileImage   String  @default("")
   descriptionBio String?
   userId         Int

@@ -79,6 +79,7 @@ export class PetterInfosService {
         petterBreed: data.petterBreed,
         petterBirth: data.petterBirth,
         profileImage: profileUrl,
+        petterGender: data.petterGender,
         descriptionBio: data.descriptionBio,
         user: {
           connect: { id: userExist.id },
@@ -111,6 +112,7 @@ export class PetterInfosService {
         petterKind: true,
         petterBreed: true,
         petterBirth: true,
+        petterGender: true,
         profileImage: true,
         descriptionBio: true,
       },

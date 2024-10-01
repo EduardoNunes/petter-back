@@ -13,6 +13,7 @@ export class PetterProfilePageService {
         petterKind: true,
         petterBreed: true,
         petterBirth: true,
+        petterGender: true,
         profileImage: true,
         userId: true,
         descriptionBio: true,
