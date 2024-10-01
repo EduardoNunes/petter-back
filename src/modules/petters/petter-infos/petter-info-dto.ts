@@ -4,7 +4,7 @@ export type PetterInfosDTO = {
   petterKind: string;
   petterBreed: string;
   petterBirth: string;
-  profileImageFile: Express.Multer.File;
+  profileImageFile?: Express.Multer.File;
   petterGender: string;
   descriptionBio?: string;
 };

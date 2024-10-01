@@ -119,4 +119,25 @@ export class PetterInfosService {
     });
     return petter;
   }
+
+  async updateProfilePetter(
+    userId: number,
+    petterId: number,
+    data: PetterInfosDTO,
+  ) {
+    return this.prisma.petterInfo.update({
+      where: {
+        userId: userId,
+        id: petterId,
+      },
+      data: {
+        petterName: data.petterName,
+        petterKind: data.petterKind,
+        petterBreed: data.petterBreed,
+        petterBirth: data.petterBirth,
+        petterGender: data.petterGender,
+        descriptionBio: data.descriptionBio,
+      },
+    });
+  }
 }

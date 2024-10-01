@@ -51,4 +51,13 @@ export class PetterInfosController {
     }
     return this.petterInfosService.findOne(petterId);
   }
+
+  @Patch('/:userId/:petterId/edit-profile-petter')
+  async updateProfilePetter(
+    @Param('userId', ParseIntPipe) userId: number,
+    @Param('petterId', ParseIntPipe) petterId: number,
+    @Body() data: PetterInfosDTO,
+  ) {
+    return this.petterInfosService.updateProfilePetter(userId, petterId, data);
+  }
 }
