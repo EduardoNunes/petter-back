@@ -41,7 +41,11 @@ export class PetterInfosController {
     @Param('petterId', ParseIntPipe) petterId: number,
     @Body('descriptionBio') descriptionBio: string,
   ) {
-    return this.petterInfosService.updateDescriptionBio(userId, petterId, descriptionBio);
+    return this.petterInfosService.updateDescriptionBio(
+      userId,
+      petterId,
+      descriptionBio,
+    );
   }
 
   @Get()
@@ -53,11 +57,19 @@ export class PetterInfosController {
   }
 
   @Patch('/:userId/:petterId/edit-profile-petter')
+  @UseInterceptors(FileInterceptor('profileImageFile'))
   async updateProfilePetter(
     @Param('userId', ParseIntPipe) userId: number,
     @Param('petterId', ParseIntPipe) petterId: number,
+    @UploadedFile() file: Express.Multer.File,
     @Body() data: PetterInfosDTO,
   ) {
+    if (file) {
+      data.profileImageFile = file;
+    } else {
+      data.profileImageFile = undefined;
+    }
+
     return this.petterInfosService.updateProfilePetter(userId, petterId, data);
   }
 }

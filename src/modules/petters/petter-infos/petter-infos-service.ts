@@ -30,7 +30,7 @@ export class PetterInfosService {
     } catch (error) {
       console.error('ERROR', error);
       throw new HttpException(
-        'Erro ao fazer upload da imagem para o S3',
+        'Erro ao fazer upload da imagem.',
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
@@ -125,16 +125,26 @@ export class PetterInfosService {
     petterId: number,
     data: PetterInfosDTO,
   ) {
+    let profileUrl: string | undefined;
+
+    if (data.profileImageFile) {
+      profileUrl = await this.uploadImageToS3(data.profileImageFile);
+    } else {
+      const petter = await this.prisma.petterInfo.findFirst({
+        where: { userId: userId, id: petterId },
+        select: { profileImage: true },
+      });
+      profileUrl = petter?.profileImage;
+    }
+
     return this.prisma.petterInfo.update({
-      where: {
-        userId: userId,
-        id: petterId,
-      },
+      where: { userId: userId, id: petterId },
       data: {
         petterName: data.petterName,
         petterKind: data.petterKind,
         petterBreed: data.petterBreed,
         petterBirth: data.petterBirth,
+        profileImage: profileUrl,
         petterGender: data.petterGender,
         descriptionBio: data.descriptionBio,
       },
