@@ -39,7 +39,7 @@ export class PettersRegisterImagesService {
     }
   }
 
-  async createPetterRegisterImage(petterId: number, data: PetterRegisterImagesDTO) {
+  async createPetterManyImages(petterId: number, data: PetterRegisterImagesDTO) {
     const imageUrls: string[] = [];
 
     const petterExist = await this.prisma.petterInfo.findUnique({
@@ -56,7 +56,7 @@ export class PettersRegisterImagesService {
       const imageUrl = await this.uploadImageToS3(data.images[i]);
       imageUrls.push(imageUrl);
 
-      const newPetterImages = await this.prisma.petterImages.create({
+      await this.prisma.petterImages.create({
         data: {
           url: imageUrl,
           petterId: Number(petterId[0]),
@@ -64,5 +64,74 @@ export class PettersRegisterImagesService {
       });
       console.log('Novas imagens do Petter criadas:');
     }
+  }
+
+  async postPetterImageGallery(data: PetterRegisterImagesDTO) {
+    let imageUrl: string | undefined;
+
+    try {
+      imageUrl = await this.uploadImageToS3(data.singleImage);
+
+      if (!imageUrl) {
+        throw new Error('Falha ao fazer upload da imagem.');
+      }
+
+      return await this.prisma.petterImages.create({
+        data: {
+          url: imageUrl,
+          description: data.description,
+          petterId: data.petterId,
+        },
+      });
+    } catch (error) {
+      console.error('Erro ao registrar imagem do Petter:', error);
+      throw new Error('Erro ao registrar imagem do Petter.');
+    }
+  }
+
+  async postPetterImageTimeline(
+    petterId: number,
+    data: PetterRegisterImagesDTO,
+  ) {
+    const petterExist = await this.prisma.petterInfo.findUnique({
+      where: {
+        id: Number(petterId),
+      },
+    });
+
+    if (!petterExist) {
+      throw new HttpException('Petter não encontrado.', HttpStatus.BAD_REQUEST);
+    }
+
+    const userExist = await this.prisma.users.findUnique({
+      where: {
+        id: Number(data.userId),
+      },
+    });
+
+    if (!userExist) {
+      throw new HttpException(
+        'Usuário não encontrado.',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    const imageUrl = await this.uploadImageToS3(data.singleImage);
+
+    const newPetterImageTimeline =
+      await this.prisma.petterImagesTimeline.create({
+        data: {
+          url: imageUrl,
+          description: data.description,
+          petterInfo: { connect: { id: Number(petterId) } },
+          user: { connect: { id: userExist.id } },
+        },
+      });
+
+    console.log(
+      'Nova imagem do Petter na timeline criada:',
+      newPetterImageTimeline,
+    );
+    return newPetterImageTimeline;
   }
 }
