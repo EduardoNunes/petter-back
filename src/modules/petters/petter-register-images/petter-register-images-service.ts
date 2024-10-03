@@ -39,7 +39,10 @@ export class PettersRegisterImagesService {
     }
   }
 
-  async createPetterManyImages(petterId: number, data: PetterRegisterImagesDTO) {
+  async createPetterManyImages(
+    petterId: number,
+    data: PetterRegisterImagesDTO,
+  ) {
     const imageUrls: string[] = [];
 
     const petterExist = await this.prisma.petterInfo.findUnique({
@@ -69,6 +72,18 @@ export class PettersRegisterImagesService {
   async postPetterImageGallery(data: PetterRegisterImagesDTO) {
     let imageUrl: string | undefined;
 
+    if (!data.singleImage) {
+      console.error('Há algo errado com a image.');
+    }
+
+    if (!data.petterId) {
+      console.error('PetterId faltando.');
+    }
+
+    if (!data.userId) {
+      console.error('UserId faltando.');
+    }
+
     try {
       imageUrl = await this.uploadImageToS3(data.singleImage);
 
@@ -93,6 +108,10 @@ export class PettersRegisterImagesService {
     petterId: number,
     data: PetterRegisterImagesDTO,
   ) {
+    if (!data.petterId) {
+      console.error('PetterId faltando.');
+    }
+
     const petterExist = await this.prisma.petterInfo.findUnique({
       where: {
         id: Number(petterId),
@@ -117,6 +136,10 @@ export class PettersRegisterImagesService {
     }
 
     const imageUrl = await this.uploadImageToS3(data.singleImage);
+
+    if (!imageUrl) {
+      throw new Error('Falha ao fazer upload da imagem.');
+    }
 
     const newPetterImageTimeline =
       await this.prisma.petterImagesTimeline.create({
