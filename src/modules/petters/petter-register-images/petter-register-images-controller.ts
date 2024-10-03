@@ -38,7 +38,6 @@ export class PettersRegisterImagesController {
     @Body() data: PetterRegisterImagesDTO,
     @UploadedFile() file: Express.Multer.File,
   ) {
-    console.log('CHEGOU1');
     if (file) {
       data.singleImage = file;
     } else {

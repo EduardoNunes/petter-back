@@ -80,7 +80,7 @@ export class PettersRegisterImagesService {
         data: {
           url: imageUrl,
           description: data.description,
-          petterId: data.petterId,
+          petterId: Number(data.petterId),
         },
       });
     } catch (error) {
