@@ -8,7 +8,6 @@ import { PetterProfilePageModule } from './modules/petters/petter-profile-page/p
 import { PettersRegisterImageModule } from './modules/petters/petter-register-images/petter-register-images-module';
 import { CommentPostTimelineModule } from './modules/timeline/comment-post-timeline/comment-post-timeline.module';
 import { LikePostTimelineModule } from './modules/timeline/like-post-timeline/like-post-timeline.module';
-import { PetterImageTimelineModule } from './modules/timeline/post-petter-image-timeline/petter-image-timeline.module';
 import { ShowCardTimelineModule } from './modules/timeline/show-card-timeline/show-card-timeline.module';
 import { UserInfosModule } from './modules/users/user-infos/user-infos-module';
 import { UsersCredentialsModule } from './modules/users/users-credentials/users-credentials-module';
@@ -24,7 +23,6 @@ import { FollowUnfollowModule } from './modules/follow-unfollow/follow-unfollow.
     PetterInfosModule,
     PettersRegisterImageModule,
     ShowCardTimelineModule,
-    PetterImageTimelineModule,
     ShowImagesProfileModule,
     LikePostTimelineModule,
     CommentPostTimelineModule,
