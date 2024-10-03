@@ -37,9 +37,9 @@ export class ShowImagesProfileService {
           id: 'desc',
         },
       });
-
+      
       const profileImageUrls = showImagesProfile.map((image) => {
-        return `${image.id} ${image.url}`;
+        return `${image.id} ${image.url} ${image.description}`;
       });
 
       return {
